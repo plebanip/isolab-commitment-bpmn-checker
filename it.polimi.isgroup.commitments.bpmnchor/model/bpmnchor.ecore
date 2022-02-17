@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bpmnchor" nsURI="http://www.example.org/bpmnchor" nsPrefix="bpmnchor">
+  <eClassifiers xsi:type="ecore:EClass" name="MonitoringResource" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//RootElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endpoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canCompute" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//MonitoringResType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MonitoringResType">
+    <eLiterals name="SmartObject"/>
+    <eLiterals name="API" value="1" literal=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommitmentExpression" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemDefinitionRefs" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.bpmn2/model/BPMN20.ecore#//ItemDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Commitment" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//FlowElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//CommitmentType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="antecedentExpr" lowerBound="1"
+        eType="#//CommitmentExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consequentExpr" lowerBound="1"
+        eType="#//CommitmentExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activeExpr" eType="#//CommitmentExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopeBegin" lowerBound="1"
+        eType="#//ConnectionPoint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopeEnd" lowerBound="1"
+        eType="#//ConnectionPoint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionPoint" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//FlowElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="side" lowerBound="1" eType="#//MessageType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messageFlowRef" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.bpmn2/model/BPMN20.ecore#//MessageFlow"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MessageType">
+    <eLiterals name="Send"/>
+    <eLiterals name="Receive" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CommitmentType">
+    <eLiterals name="Goal"/>
+    <eLiterals name="Persistent" value="1" literal=""/>
+  </eClassifiers>
+</ecore:EPackage>

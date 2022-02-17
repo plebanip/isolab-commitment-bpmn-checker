@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.polimi.isgroup.commitments.bpmnchor/src" modelPluginID="it.polimi.isgroup.commitments.bpmnchor"
+    modelName="Bpmnchor" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    usedGenPackages="../../org.eclipse.bpmn2/model/BPMN20.genmodel#//bpmn2 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di.1 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//dc"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>bpmnchor.ecore</foreignModel>
+  <genPackages prefix="Bpmnchor" disposableProviderFactory="true" ecorePackage="bpmnchor.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="bpmnchor.ecore#//MonitoringResType">
+      <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//MonitoringResType/SmartObject"/>
+      <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//MonitoringResType/API"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="bpmnchor.ecore#//MessageType">
+      <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//MessageType/Send"/>
+      <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//MessageType/Receive"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="bpmnchor.ecore#//CommitmentType">
+      <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//CommitmentType/Goal"/>
+      <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//CommitmentType/Persistent"/>
+    </genEnums>
+    <genClasses ecoreClass="bpmnchor.ecore#//MonitoringResource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//MonitoringResource/endpoint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//MonitoringResource/canCompute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//MonitoringResource/type"/>
+    </genClasses>
+    <genClasses ecoreClass="bpmnchor.ecore#//CommitmentExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//CommitmentExpression/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//CommitmentExpression/body"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//CommitmentExpression/itemDefinitionRefs"/>
+    </genClasses>
+    <genClasses ecoreClass="bpmnchor.ecore#//Commitment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//Commitment/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Commitment/antecedentExpr"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Commitment/consequentExpr"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Commitment/activeExpr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Commitment/scopeBegin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Commitment/scopeEnd"/>
+    </genClasses>
+    <genClasses ecoreClass="bpmnchor.ecore#//Sentry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//Sentry/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Sentry/messageFlowRef"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
