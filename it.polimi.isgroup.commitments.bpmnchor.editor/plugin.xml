@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated bpmnchor -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="bpmnchor.presentation.BpmnchorModelWizardID"
+            name="%_UI_BpmnchorModelWizard_label"
+            class="bpmnchor.presentation.BpmnchorModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/BpmnchorModelFile.gif">
+         <description>%_UI_BpmnchorModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated bpmnchor -->
+      <editor
+            id="bpmnchor.presentation.BpmnchorEditorID"
+            name="%_UI_BpmnchorEditor_label"
+            icon="icons/full/obj16/BpmnchorModelFile.gif"
+            extensions="bpmnchor"
+            class="bpmnchor.presentation.BpmnchorEditor"
+            contributorClass="bpmnchor.presentation.BpmnchorActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

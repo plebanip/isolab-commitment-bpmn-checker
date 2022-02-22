@@ -2,11 +2,13 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.polimi.isgroup.commitments.bpmnchor/src" modelPluginID="it.polimi.isgroup.commitments.bpmnchor"
     modelName="Bpmnchor" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.bpmn2/model/BPMN20.genmodel#//bpmn2 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di.1 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//dc"
+    rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    copyrightFields="false" providerRootExtendsClass="" usedGenPackages="../../org.eclipse.bpmn2/model/BPMN20.genmodel#//bpmn2 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di.1 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//dc"
     operationReflection="true" importOrganizing="true">
   <foreignModel>bpmnchor.ecore</foreignModel>
-  <genPackages prefix="Bpmnchor" disposableProviderFactory="true" ecorePackage="bpmnchor.ecore#/">
+  <genPackages prefix="Bpmnchor" resource="XMI" disposableProviderFactory="true" loadInitialization="true"
+      multipleEditorPages="false" contentTypeIdentifier="" ecorePackage="bpmnchor.ecore#/"
+      publicationLocation="">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="bpmnchor.ecore#//MonitoringResType">
       <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//MonitoringResType/SmartObject"/>
       <genEnumLiterals ecoreEnumLiteral="bpmnchor.ecore#//MonitoringResType/API"/>
@@ -23,11 +25,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//MonitoringResource/endpoint"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//MonitoringResource/canCompute"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//MonitoringResource/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//MonitoringResource/ownerRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//MonitoringResource/itemRef"/>
     </genClasses>
     <genClasses ecoreClass="bpmnchor.ecore#//CommitmentExpression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//CommitmentExpression/language"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//CommitmentExpression/body"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//CommitmentExpression/itemDefinitionRefs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//CommitmentExpression/itemRefs"/>
     </genClasses>
     <genClasses ecoreClass="bpmnchor.ecore#//Commitment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//Commitment/type"/>
@@ -37,9 +41,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Commitment/scopeBegin"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Commitment/scopeEnd"/>
     </genClasses>
-    <genClasses ecoreClass="bpmnchor.ecore#//Sentry">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//Sentry/type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//Sentry/messageFlowRef"/>
+    <genClasses ecoreClass="bpmnchor.ecore#//ConnectionPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bpmnchor.ecore#//ConnectionPoint/side"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bpmnchor.ecore#//ConnectionPoint/messageFlowRef"/>
     </genClasses>
+    <genClasses ecoreClass="bpmnchor.ecore#//Definitions"/>
   </genPackages>
 </genmodel:GenModel>

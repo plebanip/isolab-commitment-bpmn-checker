@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bpmnchor" nsURI="http://www.example.org/bpmnchor" nsPrefix="bpmnchor">
-  <eClassifiers xsi:type="ecore:EClass" name="MonitoringResource" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//RootElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MonitoringResource" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//RootElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="endpoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="canCompute" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//MonitoringResType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerRef" eType="ecore:EClass ../../org.eclipse.bpmn2/model/BPMN20.ecore#//Participant"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerRef" eType="ecore:EClass http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//Participant"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="itemRef" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.bpmn2/model/BPMN20.ecore#//ItemDefinition"/>
+        eType="ecore:EClass http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//ItemDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MonitoringResType">
     <eLiterals name="SmartObject"/>
     <eLiterals name="API" value="1" literal=""/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CommitmentExpression" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="CommitmentExpression" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="itemRefs" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.bpmn2/model/BPMN20.ecore#//ItemDefinition"/>
+        eType="ecore:EClass http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//ItemDefinition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Commitment" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//FlowElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Commitment" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//FlowElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//CommitmentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="antecedentExpr" lowerBound="1"
         eType="#//CommitmentExpression"/>
@@ -33,10 +33,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopeEnd" lowerBound="1"
         eType="#//ConnectionPoint" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectionPoint" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//FlowElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionPoint" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//FlowElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="side" lowerBound="1" eType="#//MessageType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="messageFlowRef" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.bpmn2/model/BPMN20.ecore#//MessageFlow"/>
+        eType="ecore:EClass http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//MessageFlow"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MessageType">
     <eLiterals name="Send"/>
@@ -46,5 +46,5 @@
     <eLiterals name="Goal"/>
     <eLiterals name="Persistent" value="1" literal=""/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Definitions" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//Definitions"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Definitions" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//Definitions"/>
 </ecore:EPackage>
