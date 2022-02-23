@@ -44,7 +44,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CommitmentType">
     <eLiterals name="Goal"/>
-    <eLiterals name="Persistent" value="1" literal=""/>
+    <eLiterals name="Persistent" value="1" literal="Persistent"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definitions" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//Definitions"/>
 </ecore:EPackage>

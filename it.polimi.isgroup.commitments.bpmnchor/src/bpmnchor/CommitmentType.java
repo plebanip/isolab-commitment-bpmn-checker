@@ -36,7 +36,7 @@ public enum CommitmentType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PERSISTENT(1, "Persistent", "");
+	PERSISTENT(1, "Persistent", "Persistent");
 
 	/**
 	 * The '<em><b>Goal</b></em>' literal value.
@@ -62,7 +62,7 @@ public enum CommitmentType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #PERSISTENT
-	 * @model name="Persistent" literal=""
+	 * @model name="Persistent"
 	 * @generated
 	 * @ordered
 	 */

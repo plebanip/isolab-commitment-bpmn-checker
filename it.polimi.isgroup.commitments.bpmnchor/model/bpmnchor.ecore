@@ -44,7 +44,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CommitmentType">
     <eLiterals name="Goal"/>
-    <eLiterals name="Persistent" value="1" literal=""/>
+    <eLiterals name="Persistent" value="1" literal="Persistent"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definitions" eSuperTypes="../../org.eclipse.bpmn2/model/BPMN20.ecore#//Definitions"/>
 </ecore:EPackage>
