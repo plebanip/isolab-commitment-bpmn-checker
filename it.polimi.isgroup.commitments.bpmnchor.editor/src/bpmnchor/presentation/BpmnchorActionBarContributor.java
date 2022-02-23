@@ -15,7 +15,6 @@ import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
-import org.eclipse.emf.edit.ui.action.ValidateAction;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
@@ -37,7 +36,16 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.Viewer;
 
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
+
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleConstants;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.IConsoleView;
+import org.eclipse.ui.console.MessageConsole;
+
 
 /**
  * This is the action bar contributor for the Bpmnchor model editor.
@@ -48,6 +56,21 @@ import org.eclipse.ui.PartInitException;
 public class BpmnchorActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
+	
+	public static MessageConsole findConsole(String name) {
+	      ConsolePlugin plugin = ConsolePlugin.getDefault();
+	      IConsoleManager conMan = plugin.getConsoleManager();
+	      IConsole[] existing = conMan.getConsoles();
+	      for (int i = 0; i < existing.length; i++)
+	         if (name.equals(existing[i].getName()))
+	            return (MessageConsole) existing[i];
+	      //no console found, so create a new one
+	      MessageConsole myConsole = new MessageConsole(name, null);
+	      conMan.addConsoles(new IConsole[]{myConsole});
+	      return myConsole;
+	}
+	
+	
 	/**
 	 * This keeps track of the active editor.
 	 * <!-- begin-user-doc -->
@@ -64,6 +87,41 @@ public class BpmnchorActionBarContributor
 	 */
 	protected ISelectionProvider selectionProvider;
 
+	protected IAction importBPMNAction = new Action ("Import BPMN choreography diagram") {
+		@Override
+		public void run() {
+			IWorkbenchPage page = getPage();
+			BpmnchorEditor editor = (BpmnchorEditor) page.getActiveEditor();
+			editor.doImportBPMN();
+		}
+	};
+	
+	protected IAction checkAction = new Action ("Infer deployment requirements") {
+		@Override
+		public void run() {
+			IWorkbenchPage page = getPage();
+			BpmnchorEditor editor = (BpmnchorEditor) page.getActiveEditor();
+			editor.doCheck();
+		}
+	};
+	
+	
+	protected IAction showConsoleAction = new Action(
+			"Show Console") //$NON-NLS-1$
+	{
+		@Override
+		public void run() {
+			IWorkbenchPage page = getPage();
+			String id = IConsoleConstants.ID_CONSOLE_VIEW;
+			  try {
+				IConsoleView view = (IConsoleView) page.showView(id);
+				view.display(findConsole("MyConsole"));
+			} catch (PartInitException e) {
+				e.printStackTrace();
+			}
+		}
+	};
+	
 	/**
 	 * This action opens the Properties view.
 	 * <!-- begin-user-doc -->
@@ -151,7 +209,7 @@ public class BpmnchorActionBarContributor
 	public BpmnchorActionBarContributor() {
 		super(ADDITIONS_LAST_STYLE);
 		loadResourceAction = new LoadResourceAction();
-		validateAction = new ValidateAction();
+		//validateAction = new ValidateAction();
 		controlAction = new ControlAction();
 	}
 
@@ -400,11 +458,16 @@ public class BpmnchorActionBarContributor
 	 */
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
+		
+		menuManager.insertBefore("additions", importBPMNAction); //$NON-NLS-1$
+		menuManager.insertBefore("additions", checkAction); //$NON-NLS-1$
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
 
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
+		
+		menuManager.insertAfter("ui-actions", showConsoleAction); //$NON-NLS-1$
 
 		super.addGlobalActions(menuManager);
 	}

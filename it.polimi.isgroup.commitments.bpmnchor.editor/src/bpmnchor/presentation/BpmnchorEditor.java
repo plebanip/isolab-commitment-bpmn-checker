@@ -144,6 +144,8 @@ import org.eclipse.emf.edit.ui.util.EditUIUtil;
 
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
+import bpmnchor.infer.ConsoleMessage;
+import bpmnchor.infer.InferDeploymentRequirements;
 import bpmnchor.provider.BpmnchorItemProviderAdapterFactory;
 
 import org.eclipse.bpmn2.di.provider.BpmnDiItemProviderAdapterFactory;
@@ -155,6 +157,8 @@ import org.eclipse.dd.dc.provider.DcItemProviderAdapterFactory;
 import org.eclipse.dd.di.provider.DiItemProviderAdapterFactory;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 
 
 /**
@@ -1207,6 +1211,39 @@ public class BpmnchorEditor
 		return ((BasicCommandStack)editingDomain.getCommandStack()).isSaveNeeded();
 	}
 
+	//TODO: add here invocation for importing bpmn diagrams
+	public void doImportBPMN() {
+		for (Resource resource : editingDomain.getResourceSet().getResources()) {
+			MessageDialog.openInformation(getSite().getShell(), "Import BPMN", 
+					"To be implemented.");
+		}
+	}
+	
+	//TODO: add here invocation for checking constraints
+	public void doCheck() {
+		for (Resource resource : editingDomain.getResourceSet().getResources()) {
+			
+			InferDeploymentRequirements r = new InferDeploymentRequirements();
+			MessageConsole myConsole = BpmnchorActionBarContributor.findConsole("MyConsole");
+			MessageConsoleStream out = myConsole.newMessageStream();
+
+			List<ConsoleMessage> log = r.infer(resource);
+			for (ConsoleMessage m : log) {
+				out.println(m.toString());
+			}
+			if (r.checkForErrors(log)) {
+				MessageDialog.openError(getSite().getShell(), "Infer monitoring deployment requirements", 
+						"One or more conflicts were detected. Please check the console log for further details.");
+			} else if (r.checkForWarnings(log)) {
+				MessageDialog.openWarning(getSite().getShell(), "Infer monitoring deployment requirements", 
+						"Deployment requirements assessment completed with warnings. Please check the console log for further details.");
+			} else {
+				MessageDialog.openInformation(getSite().getShell(), "Infer monitoring deployment requirements", 
+						"Deployment requirements assessment completed successfully. Please check the console log for further details.");
+			}
+		}
+	}
+	
 	/**
 	 * This is for implementing {@link IEditorPart} and simply saves the model file.
 	 * <!-- begin-user-doc -->
