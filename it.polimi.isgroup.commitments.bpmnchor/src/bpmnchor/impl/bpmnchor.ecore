@@ -12,16 +12,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MonitoringResType">
     <eLiterals name="SmartObject"/>
-    <eLiterals name="API" value="1" literal=""/>
+    <eLiterals name="API" value="1" literal="API"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CommitmentExpression" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="CommitmentExpression" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//Expression http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//RootElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="itemRefs" upperBound="-1"
         eType="ecore:EClass http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//ItemDefinition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Commitment" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//FlowElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Commitment" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//RootElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//CommitmentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="antecedentExpr" lowerBound="1"
         eType="#//CommitmentExpression"/>
@@ -33,7 +33,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopeEnd" lowerBound="1"
         eType="#//ConnectionPoint" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectionPoint" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//FlowElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionPoint" eSuperTypes="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//RootElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="side" lowerBound="1" eType="#//MessageType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="messageFlowRef" lowerBound="1"
         eType="ecore:EClass http://www.omg.org/spec/BPMN/20100524/MODEL-XMI#//MessageFlow"/>

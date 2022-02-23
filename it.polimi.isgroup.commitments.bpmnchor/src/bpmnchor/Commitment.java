@@ -2,7 +2,7 @@
  */
 package bpmnchor;
 
-import org.eclipse.bpmn2.FlowElement;
+import org.eclipse.bpmn2.RootElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,7 @@ import org.eclipse.bpmn2.FlowElement;
  * @model
  * @generated
  */
-public interface Commitment extends FlowElement {
+public interface Commitment extends RootElement {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link bpmnchor.CommitmentType}.

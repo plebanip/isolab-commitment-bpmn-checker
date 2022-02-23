@@ -6,7 +6,6 @@ import bpmnchor.*;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Expression;
-import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.RootElement;
 
 import org.eclipse.emf.ecore.EObject;
@@ -83,6 +82,7 @@ public class BpmnchorSwitch<T> extends Switch<T> {
 				CommitmentExpression commitmentExpression = (CommitmentExpression)theEObject;
 				T result = caseCommitmentExpression(commitmentExpression);
 				if (result == null) result = caseExpression(commitmentExpression);
+				if (result == null) result = caseRootElement(commitmentExpression);
 				if (result == null) result = caseBaseElement(commitmentExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -90,7 +90,7 @@ public class BpmnchorSwitch<T> extends Switch<T> {
 			case BpmnchorPackage.COMMITMENT: {
 				Commitment commitment = (Commitment)theEObject;
 				T result = caseCommitment(commitment);
-				if (result == null) result = caseFlowElement(commitment);
+				if (result == null) result = caseRootElement(commitment);
 				if (result == null) result = caseBaseElement(commitment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -98,7 +98,7 @@ public class BpmnchorSwitch<T> extends Switch<T> {
 			case BpmnchorPackage.CONNECTION_POINT: {
 				ConnectionPoint connectionPoint = (ConnectionPoint)theEObject;
 				T result = caseConnectionPoint(connectionPoint);
-				if (result == null) result = caseFlowElement(connectionPoint);
+				if (result == null) result = caseRootElement(connectionPoint);
 				if (result == null) result = caseBaseElement(connectionPoint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -232,21 +232,6 @@ public class BpmnchorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpression(Expression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Flow Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Flow Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFlowElement(FlowElement object) {
 		return null;
 	}
 

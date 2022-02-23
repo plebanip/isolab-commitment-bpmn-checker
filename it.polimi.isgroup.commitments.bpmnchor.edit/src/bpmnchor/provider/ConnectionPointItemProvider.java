@@ -9,7 +9,7 @@ import bpmnchor.ConnectionPoint;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.bpmn2.provider.FlowElementItemProvider;
+import org.eclipse.bpmn2.provider.RootElementItemProvider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -27,7 +27,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ConnectionPointItemProvider extends FlowElementItemProvider {
+public class ConnectionPointItemProvider extends RootElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -118,7 +118,7 @@ public class ConnectionPointItemProvider extends FlowElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConnectionPoint)object).getName();
+		String label = ((ConnectionPoint)object).getId();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConnectionPoint_type") :
 			getString("_UI_ConnectionPoint_type") + " " + label;

@@ -104,6 +104,21 @@ public class DefinitionsItemProvider extends org.eclipse.bpmn2.provider.Definiti
 			(createChildParameter
 				(Bpmn2Package.Literals.DEFINITIONS__ROOT_ELEMENTS,
 				 BpmnchorFactory.eINSTANCE.createMonitoringResource()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Bpmn2Package.Literals.DEFINITIONS__ROOT_ELEMENTS,
+				 BpmnchorFactory.eINSTANCE.createCommitmentExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Bpmn2Package.Literals.DEFINITIONS__ROOT_ELEMENTS,
+				 BpmnchorFactory.eINSTANCE.createCommitment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Bpmn2Package.Literals.DEFINITIONS__ROOT_ELEMENTS,
+				 BpmnchorFactory.eINSTANCE.createConnectionPoint()));
 	}
 
 	/**

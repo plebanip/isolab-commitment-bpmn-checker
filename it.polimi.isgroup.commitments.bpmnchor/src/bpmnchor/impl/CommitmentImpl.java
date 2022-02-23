@@ -8,7 +8,7 @@ import bpmnchor.CommitmentExpression;
 import bpmnchor.CommitmentType;
 import bpmnchor.ConnectionPoint;
 
-import org.eclipse.bpmn2.impl.FlowElementImpl;
+import org.eclipse.bpmn2.impl.RootElementImpl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class CommitmentImpl extends FlowElementImpl implements Commitment {
+public class CommitmentImpl extends RootElementImpl implements Commitment {
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->

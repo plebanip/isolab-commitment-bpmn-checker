@@ -8,7 +8,7 @@ import bpmnchor.MessageType;
 
 import org.eclipse.bpmn2.MessageFlow;
 
-import org.eclipse.bpmn2.impl.FlowElementImpl;
+import org.eclipse.bpmn2.impl.RootElementImpl;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ConnectionPointImpl extends FlowElementImpl implements ConnectionPoint {
+public class ConnectionPointImpl extends RootElementImpl implements ConnectionPoint {
 	/**
 	 * The default value of the '{@link #getSide() <em>Side</em>}' attribute.
 	 * <!-- begin-user-doc -->

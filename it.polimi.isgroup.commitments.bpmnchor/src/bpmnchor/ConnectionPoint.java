@@ -2,8 +2,8 @@
  */
 package bpmnchor;
 
-import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.MessageFlow;
+import org.eclipse.bpmn2.RootElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +22,7 @@ import org.eclipse.bpmn2.MessageFlow;
  * @model
  * @generated
  */
-public interface ConnectionPoint extends FlowElement {
+public interface ConnectionPoint extends RootElement {
 	/**
 	 * Returns the value of the '<em><b>Side</b></em>' attribute.
 	 * The literals are from the enumeration {@link bpmnchor.MessageType}.

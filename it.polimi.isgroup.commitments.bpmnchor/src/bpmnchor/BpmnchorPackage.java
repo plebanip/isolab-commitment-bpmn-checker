@@ -294,7 +294,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__EXTENSION_VALUES = Bpmn2Package.FLOW_ELEMENT__EXTENSION_VALUES;
+	int COMMITMENT__EXTENSION_VALUES = Bpmn2Package.ROOT_ELEMENT__EXTENSION_VALUES;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference list.
@@ -303,7 +303,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__DOCUMENTATION = Bpmn2Package.FLOW_ELEMENT__DOCUMENTATION;
+	int COMMITMENT__DOCUMENTATION = Bpmn2Package.ROOT_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Extension Definitions</b></em>' reference list.
@@ -312,7 +312,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__EXTENSION_DEFINITIONS = Bpmn2Package.FLOW_ELEMENT__EXTENSION_DEFINITIONS;
+	int COMMITMENT__EXTENSION_DEFINITIONS = Bpmn2Package.ROOT_ELEMENT__EXTENSION_DEFINITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -321,7 +321,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__ID = Bpmn2Package.FLOW_ELEMENT__ID;
+	int COMMITMENT__ID = Bpmn2Package.ROOT_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Any Attribute</b></em>' attribute list.
@@ -330,43 +330,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__ANY_ATTRIBUTE = Bpmn2Package.FLOW_ELEMENT__ANY_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Auditing</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMITMENT__AUDITING = Bpmn2Package.FLOW_ELEMENT__AUDITING;
-
-	/**
-	 * The feature id for the '<em><b>Monitoring</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMITMENT__MONITORING = Bpmn2Package.FLOW_ELEMENT__MONITORING;
-
-	/**
-	 * The feature id for the '<em><b>Category Value Ref</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMITMENT__CATEGORY_VALUE_REF = Bpmn2Package.FLOW_ELEMENT__CATEGORY_VALUE_REF;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMITMENT__NAME = Bpmn2Package.FLOW_ELEMENT__NAME;
+	int COMMITMENT__ANY_ATTRIBUTE = Bpmn2Package.ROOT_ELEMENT__ANY_ATTRIBUTE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -375,7 +339,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__TYPE = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 0;
+	int COMMITMENT__TYPE = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Expr</b></em>' reference.
@@ -384,7 +348,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__ANTECEDENT_EXPR = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 1;
+	int COMMITMENT__ANTECEDENT_EXPR = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Consequent Expr</b></em>' reference.
@@ -393,7 +357,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__CONSEQUENT_EXPR = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 2;
+	int COMMITMENT__CONSEQUENT_EXPR = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Active Expr</b></em>' reference.
@@ -402,7 +366,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__ACTIVE_EXPR = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 3;
+	int COMMITMENT__ACTIVE_EXPR = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Scope Begin</b></em>' containment reference.
@@ -411,7 +375,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__SCOPE_BEGIN = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 4;
+	int COMMITMENT__SCOPE_BEGIN = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Scope End</b></em>' containment reference.
@@ -420,7 +384,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT__SCOPE_END = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 5;
+	int COMMITMENT__SCOPE_END = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Commitment</em>' class.
@@ -429,7 +393,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMMITMENT_FEATURE_COUNT = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 6;
+	int COMMITMENT_FEATURE_COUNT = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 6;
 
 //	/**
 //	 * The number of operations of the '<em>Commitment</em>' class.
@@ -438,7 +402,7 @@ public interface BpmnchorPackage extends EPackage {
 //	 * @generated
 //	 * @ordered
 //	 */
-//	int COMMITMENT_OPERATION_COUNT = Bpmn2Package.FLOW_ELEMENT_OPERATION_COUNT + 0;
+//	int COMMITMENT_OPERATION_COUNT = Bpmn2Package.ROOT_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link bpmnchor.impl.ConnectionPointImpl <em>Connection Point</em>}' class.
@@ -457,7 +421,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT__EXTENSION_VALUES = Bpmn2Package.FLOW_ELEMENT__EXTENSION_VALUES;
+	int CONNECTION_POINT__EXTENSION_VALUES = Bpmn2Package.ROOT_ELEMENT__EXTENSION_VALUES;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference list.
@@ -466,7 +430,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT__DOCUMENTATION = Bpmn2Package.FLOW_ELEMENT__DOCUMENTATION;
+	int CONNECTION_POINT__DOCUMENTATION = Bpmn2Package.ROOT_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Extension Definitions</b></em>' reference list.
@@ -475,7 +439,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT__EXTENSION_DEFINITIONS = Bpmn2Package.FLOW_ELEMENT__EXTENSION_DEFINITIONS;
+	int CONNECTION_POINT__EXTENSION_DEFINITIONS = Bpmn2Package.ROOT_ELEMENT__EXTENSION_DEFINITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -484,7 +448,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT__ID = Bpmn2Package.FLOW_ELEMENT__ID;
+	int CONNECTION_POINT__ID = Bpmn2Package.ROOT_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Any Attribute</b></em>' attribute list.
@@ -493,43 +457,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT__ANY_ATTRIBUTE = Bpmn2Package.FLOW_ELEMENT__ANY_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Auditing</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_POINT__AUDITING = Bpmn2Package.FLOW_ELEMENT__AUDITING;
-
-	/**
-	 * The feature id for the '<em><b>Monitoring</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_POINT__MONITORING = Bpmn2Package.FLOW_ELEMENT__MONITORING;
-
-	/**
-	 * The feature id for the '<em><b>Category Value Ref</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_POINT__CATEGORY_VALUE_REF = Bpmn2Package.FLOW_ELEMENT__CATEGORY_VALUE_REF;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_POINT__NAME = Bpmn2Package.FLOW_ELEMENT__NAME;
+	int CONNECTION_POINT__ANY_ATTRIBUTE = Bpmn2Package.ROOT_ELEMENT__ANY_ATTRIBUTE;
 
 	/**
 	 * The feature id for the '<em><b>Side</b></em>' attribute.
@@ -538,7 +466,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT__SIDE = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 0;
+	int CONNECTION_POINT__SIDE = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Message Flow Ref</b></em>' reference.
@@ -547,7 +475,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT__MESSAGE_FLOW_REF = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 1;
+	int CONNECTION_POINT__MESSAGE_FLOW_REF = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Connection Point</em>' class.
@@ -556,7 +484,7 @@ public interface BpmnchorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_POINT_FEATURE_COUNT = Bpmn2Package.FLOW_ELEMENT_FEATURE_COUNT + 2;
+	int CONNECTION_POINT_FEATURE_COUNT = Bpmn2Package.ROOT_ELEMENT_FEATURE_COUNT + 2;
 
 //	/**
 //	 * The number of operations of the '<em>Connection Point</em>' class.
@@ -565,7 +493,7 @@ public interface BpmnchorPackage extends EPackage {
 //	 * @generated
 //	 * @ordered
 //	 */
-//	int CONNECTION_POINT_OPERATION_COUNT = Bpmn2Package.FLOW_ELEMENT_OPERATION_COUNT + 0;
+//	int CONNECTION_POINT_OPERATION_COUNT = Bpmn2Package.ROOT_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link bpmnchor.impl.DefinitionsImpl <em>Definitions</em>}' class.

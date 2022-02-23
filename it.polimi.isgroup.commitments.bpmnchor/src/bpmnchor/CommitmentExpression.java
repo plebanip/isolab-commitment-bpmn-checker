@@ -4,6 +4,7 @@ package bpmnchor;
 
 import org.eclipse.bpmn2.Expression;
 import org.eclipse.bpmn2.ItemDefinition;
+import org.eclipse.bpmn2.RootElement;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -25,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface CommitmentExpression extends Expression {
+public interface CommitmentExpression extends Expression, RootElement {
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -6,7 +6,6 @@ import bpmnchor.*;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Expression;
-import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.RootElement;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -103,10 +102,6 @@ public class BpmnchorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
-			}
-			@Override
-			public Adapter caseFlowElement(FlowElement object) {
-				return createFlowElementAdapter();
 			}
 			@Override
 			public Adapter caseBpmn2_Definitions(org.eclipse.bpmn2.Definitions object) {
@@ -241,20 +236,6 @@ public class BpmnchorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.bpmn2.FlowElement <em>Flow Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.bpmn2.FlowElement
-	 * @generated
-	 */
-	public Adapter createFlowElementAdapter() {
 		return null;
 	}
 

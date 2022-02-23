@@ -36,7 +36,7 @@ public enum MonitoringResType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	API(1, "API", "");
+	API(1, "API", "API");
 
 	/**
 	 * The '<em><b>Smart Object</b></em>' literal value.
@@ -62,7 +62,7 @@ public enum MonitoringResType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #API
-	 * @model literal=""
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
