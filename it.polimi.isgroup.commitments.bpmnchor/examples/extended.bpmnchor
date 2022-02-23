@@ -23,7 +23,7 @@
     <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_3" sourceRef="Task_2" targetRef="EndEvent_1"/>
     <flowElements xsi:type="bpmn2:StartEvent" id="StartEvent_1" name="Start Event 1" outgoing="SequenceFlow_1"/>
   </rootElements>
-  <rootElements xsi:type="bpmnchor:MonitoringResource" id="Package" ownerRef="A" itemRef="PackageDef"/>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="Package" canCompute="true" ownerRef="A" itemRef="PackageDef"/>
   <rootElements xsi:type="bpmnchor:MonitoringResource" id="Receipt" type="API" ownerRef="B" itemRef="ReceiptDef"/>
   <rootElements xsi:type="bpmnchor:MonitoringResource" id="Invoice" type="API" ownerRef="C" itemRef="InvoiceDef"/>
   <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1C2_AntecedentExpression" language="" body="(package is not damaged)" itemRefs="PackageDef"/>
@@ -32,7 +32,7 @@
     <scopeBegin id="C1_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_m1"/>
     <scopeEnd id="C1_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_m2"/>
   </rootElements>
-  <rootElements xsi:type="bpmnchor:Commitment" id="C2" antecedentExpr="C1C2_AntecedentExpression">
+  <rootElements xsi:type="bpmnchor:Commitment" id="C2" antecedentExpr="C1C2_AntecedentExpression" consequentExpr="C2_ConsequentExpression">
     <scopeBegin id="C2_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_m1"/>
     <scopeEnd id="C2_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_m1a"/>
   </rootElements>
