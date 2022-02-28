@@ -2,6 +2,10 @@ package bpmnchor.infer.exceptions;
 
 public class ScopeMissingException extends Exception {
 
+	public ScopeMissingException() {
+		super("no scope defined");
+	}
+
 	/**
 	 * 
 	 */

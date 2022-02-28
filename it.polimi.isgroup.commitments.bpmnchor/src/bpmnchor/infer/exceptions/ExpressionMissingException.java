@@ -2,6 +2,10 @@ package bpmnchor.infer.exceptions;
 
 public class ExpressionMissingException extends Exception {
 
+	public ExpressionMissingException() {
+		super("No expression defined");
+	}
+
 	/**
 	 * 
 	 */
