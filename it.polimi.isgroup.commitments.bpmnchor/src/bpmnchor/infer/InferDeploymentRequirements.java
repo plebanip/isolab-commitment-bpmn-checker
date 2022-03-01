@@ -1,6 +1,7 @@
 package bpmnchor.infer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.bpmn2.*;
@@ -37,12 +38,14 @@ public class InferDeploymentRequirements {
 		return false;
 	}
 
-	public List<ConsoleMessage> infer(Resource resource) {
+	public List<ConsoleMessage> inferTrustful(Resource resource) {
 
-		// TODO: implement trustless monitoring
 		Definitions def = (Definitions) resource.getContents().get(0);
 
 		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
+
+		messages.add(
+				new ConsoleMessage(Severity.INFORMATION, "Inferring trustful monitoring deployment requirements", 0));
 
 		for (RootElement r : def.getRootElements()) {
 			if (r instanceof Commitment) {
@@ -60,12 +63,13 @@ public class InferDeploymentRequirements {
 						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking antecedent expression", 1));
 
 						List<MonitoringResource> smartDevices = getSmartDevices(((Commitment) r).getAntecedentExpr(),
-								def);
+								def, null);
 
 						try {
 							messages.add(determineValidity((Commitment) r, ExpressionType.ANTECEDENT));
 						} catch (MessageMissingException e) {
-							messages.add(new ConsoleMessage(Severity.ERROR, e.toString() + ", cannot determine antecedent expression validity", 2));
+							messages.add(new ConsoleMessage(Severity.ERROR,
+									e.toString() + ", cannot determine antecedent expression validity", 2));
 						}
 
 						if (smartDevices.size() > 0)
@@ -74,13 +78,13 @@ public class InferDeploymentRequirements {
 
 						messages.add(new ConsoleMessage(Severity.INFORMATION,
 								"Scenario 1: participant " + debtor.getId() + " evaluates antecedent expression", 2));
-						messages.addAll(checkAccessibility(((Commitment) r).getAntecedentExpr(), debtor, null, def));
+						messages.addAll(checkAccessibility(((Commitment) r).getAntecedentExpr(), Arrays.asList(debtor), null, def));
 
 						for (int i = 0; i < smartDevices.size(); i++) {
 							MonitoringResource dev = smartDevices.get(i);
 							messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario " + (i + 2)
 									+ ": smart device " + dev.getId() + " evaluates antecedent expression", 2));
-							messages.addAll(checkAccessibility(((Commitment) r).getAntecedentExpr(), debtor, dev, def));
+							messages.addAll(checkAccessibility(((Commitment) r).getAntecedentExpr(), Arrays.asList(debtor), dev, def));
 						}
 
 					} catch (ExpressionMissingException e) {
@@ -94,12 +98,13 @@ public class InferDeploymentRequirements {
 							messages.add(new ConsoleMessage(Severity.INFORMATION, "checking active expression", 1));
 
 							List<MonitoringResource> smartDevices = getSmartDevices(((Commitment) r).getActiveExpr(),
-									def);
+									def, null);
 
 							try {
 								messages.add(determineValidity((Commitment) r, ExpressionType.ACTIVE));
 							} catch (MessageMissingException e) {
-								messages.add(new ConsoleMessage(Severity.ERROR, e.toString() + ", cannot determine active expression validity", 2));
+								messages.add(new ConsoleMessage(Severity.ERROR,
+										e.toString() + ", cannot determine active expression validity", 2));
 							}
 
 							if (smartDevices.size() > 0)
@@ -108,13 +113,13 @@ public class InferDeploymentRequirements {
 
 							messages.add(new ConsoleMessage(Severity.INFORMATION,
 									"Scenario 1: participant " + debtor.getId() + " evaluates active expression", 2));
-							messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), debtor, null, def));
+							messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), Arrays.asList(debtor), null, def));
 
 							for (int i = 0; i < smartDevices.size(); i++) {
 								MonitoringResource dev = smartDevices.get(i);
 								messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario " + (i + 2)
 										+ ": smart device " + dev.getId() + " evaluates active expression", 2));
-								messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), debtor, dev, def));
+								messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), Arrays.asList(debtor), dev, def));
 							}
 
 						} catch (ExpressionMissingException e) {
@@ -129,12 +134,13 @@ public class InferDeploymentRequirements {
 						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking consequent expression", 1));
 
 						List<MonitoringResource> smartDevices = getSmartDevices(((Commitment) r).getConsequentExpr(),
-								def);
+								def, null);
 
 						try {
 							messages.add(determineValidity((Commitment) r, ExpressionType.CONSEQUENT));
 						} catch (MessageMissingException e) {
-							messages.add(new ConsoleMessage(Severity.ERROR, e.toString() + ", cannot determine consequent expression validity", 2));
+							messages.add(new ConsoleMessage(Severity.ERROR,
+									e.toString() + ", cannot determine consequent expression validity", 2));
 						}
 
 						if (smartDevices.size() > 0)
@@ -143,14 +149,177 @@ public class InferDeploymentRequirements {
 
 						messages.add(new ConsoleMessage(Severity.INFORMATION,
 								"Scenario 1: participant " + creditor.getId() + " evaluates consequent expression", 2));
-						messages.addAll(checkAccessibility(((Commitment) r).getConsequentExpr(), creditor, null, def));
+						messages.addAll(checkAccessibility(((Commitment) r).getConsequentExpr(), Arrays.asList(creditor), null, def));
 
 						for (int i = 0; i < smartDevices.size(); i++) {
 							MonitoringResource dev = smartDevices.get(i);
 							messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario " + (i + 2)
 									+ ": smart device " + dev.getId() + " evaluates consequent expression", 2));
 							messages.addAll(
-									checkAccessibility(((Commitment) r).getConsequentExpr(), creditor, dev, def));
+									checkAccessibility(((Commitment) r).getConsequentExpr(), Arrays.asList(creditor), dev, def));
+						}
+
+					} catch (ExpressionMissingException e) {
+						messages.add(new ConsoleMessage(Severity.ERROR,
+								"no consequent expression defined for commitment " + r.getId(), 2));
+					}
+				} catch (MessageFlowMissingException | ParticipantMissingException | ScopeMissingException e) {
+					messages.add(new ConsoleMessage(Severity.ERROR, e.toString(), 1));
+				} catch (CommitmentMissingException e1) {
+					/* should never happen */
+					e1.printStackTrace();
+				}
+
+			}
+		}
+
+		if (checkForErrors(messages)) {
+			return messages;
+		}
+
+		return messages;
+	}
+
+	public List<ConsoleMessage> inferTrustless(Resource resource) {
+
+		// TODO: implement scope identification from smart devices
+		Definitions def = (Definitions) resource.getContents().get(0);
+
+		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
+
+		messages.add(
+				new ConsoleMessage(Severity.INFORMATION, "Inferring trustless monitoring deployment requirements", 0));
+
+		for (RootElement r : def.getRootElements()) {
+			if (r instanceof Commitment) {
+
+				messages.add(new ConsoleMessage(Severity.INFORMATION, "checking commitment " + r.getId(), 0));
+
+				try {
+					ConnectionPoint begin = getScopeBegin((Commitment) r);
+					ConnectionPoint end = getScopeEnd((Commitment) r);
+
+					Participant debtor = getParticipant(begin);
+					Participant creditor = getParticipant(end);
+
+					/* check antecedent */
+					try {
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking antecedent expression", 1));
+
+						List<MonitoringResource> debtorSmartDevices = getSmartDevices(((Commitment) r).getAntecedentExpr(),
+								def,debtor);
+						List<MonitoringResource> creditorSmartDevices = getSmartDevices(((Commitment) r).getAntecedentExpr(),
+								def,creditor);
+
+						try {
+							messages.add(determineValidity((Commitment) r, ExpressionType.ANTECEDENT));
+						} catch (MessageMissingException e) {
+							messages.add(new ConsoleMessage(Severity.ERROR,
+									e.toString() + ", cannot determine antecedent expression validity", 2));
+						}
+
+						if (debtorSmartDevices.size() > 0 && creditorSmartDevices.size() > 0)
+							messages.add(new ConsoleMessage(Severity.INFORMATION,
+									debtorSmartDevices.size() + " smart devices of " + debtor.getId() + " and " + creditorSmartDevices.size() + " smart devices of " + creditor.getId() + " can evaluate antecedent expression", 2));
+
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario 1: participants "
+								+ debtor.getId() + " and " + creditor.getId() + " evaluate antecedent expression", 2));
+						messages.addAll(checkAccessibility(((Commitment) r).getAntecedentExpr(), Arrays.asList(debtor,creditor), null, def));
+
+						Integer i = 0;
+						
+						for (MonitoringResource debtorDev: debtorSmartDevices){
+							for (MonitoringResource creditorDev: creditorSmartDevices){
+								messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario " + (i + 2)
+										+ ": smart devices " + debtorDev.getId() + " and " + creditorDev.getId() + " evaluate antecedent expression", 2));
+								messages.addAll(checkAccessibility(((Commitment) r).getAntecedentExpr(), Arrays.asList(debtor,creditor), debtorDev, def));
+								messages.addAll(checkAccessibility(((Commitment) r).getAntecedentExpr(), Arrays.asList(debtor,creditor), creditorDev, def));
+								i++;
+							}
+						}
+						
+					} catch (ExpressionMissingException e) {
+						messages.add(new ConsoleMessage(Severity.ERROR,
+								"no antecedent expression defined for commitment " + r.getId(), 2));
+					}
+
+					/* check active */
+					if (((Commitment) r).getActiveExpr() != null) {
+						try {
+							messages.add(new ConsoleMessage(Severity.INFORMATION, "checking active expression", 1));
+
+							List<MonitoringResource> debtorSmartDevices = getSmartDevices(((Commitment) r).getActiveExpr(),
+									def,debtor);
+							List<MonitoringResource> creditorSmartDevices = getSmartDevices(((Commitment) r).getActiveExpr(),
+									def,creditor);
+
+							try {
+								messages.add(determineValidity((Commitment) r, ExpressionType.ACTIVE));
+							} catch (MessageMissingException e) {
+								messages.add(new ConsoleMessage(Severity.ERROR,
+										e.toString() + ", cannot determine active expression validity", 2));
+							}
+
+							if (debtorSmartDevices.size() > 0 && creditorSmartDevices.size() > 0)
+								messages.add(new ConsoleMessage(Severity.INFORMATION,
+										debtorSmartDevices.size() + " smart devices of " + debtor.getId() + " and " + creditorSmartDevices.size() + " smart devices of " + creditor.getId() + " can evaluate active expression", 2));
+
+							messages.add(new ConsoleMessage(Severity.INFORMATION,
+									"Scenario 1: participant " + debtor.getId() + " evaluates active expression", 2));
+							messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), Arrays.asList(debtor,creditor), null, def));
+
+							Integer i = 0;
+							
+							for (MonitoringResource debtorDev: debtorSmartDevices){
+								for (MonitoringResource creditorDev: creditorSmartDevices){
+									messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario " + (i + 2)
+											+ ": smart devices " + debtorDev.getId() + " and " + creditorDev.getId() + " evaluate active expression", 2));
+									messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), Arrays.asList(debtor,creditor), debtorDev, def));
+									messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), Arrays.asList(debtor,creditor), creditorDev, def));
+									i++;
+								}
+							}
+
+						} catch (ExpressionMissingException e) {
+							messages.add(new ConsoleMessage(Severity.ERROR,
+									"no active expression defined for commitment " + r.getId(), 2));
+						}
+					}
+
+					/* check consequent */
+					try {
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking consequent expression", 1));
+
+						List<MonitoringResource> debtorSmartDevices = getSmartDevices(((Commitment) r).getConsequentExpr(),
+								def,debtor);
+						List<MonitoringResource> creditorSmartDevices = getSmartDevices(((Commitment) r).getConsequentExpr(),
+								def,creditor);
+
+						try {
+							messages.add(determineValidity((Commitment) r, ExpressionType.CONSEQUENT));
+						} catch (MessageMissingException e) {
+							messages.add(new ConsoleMessage(Severity.ERROR,
+									e.toString() + ", cannot determine consequent expression validity", 2));
+						}
+
+						if (debtorSmartDevices.size() > 0 && creditorSmartDevices.size() > 0)
+							messages.add(new ConsoleMessage(Severity.INFORMATION,
+									debtorSmartDevices.size() + " smart devices of " + debtor.getId() + " and " + creditorSmartDevices.size() + " smart devices of " + creditor.getId() + " can evaluate consequent expression", 2));
+
+						messages.add(new ConsoleMessage(Severity.INFORMATION,
+								"Scenario 1: participant " + creditor.getId() + " evaluates consequent expression", 2));
+						messages.addAll(checkAccessibility(((Commitment) r).getConsequentExpr(), Arrays.asList(debtor,creditor), null, def));
+
+						Integer i = 0;
+						
+						for (MonitoringResource debtorDev: debtorSmartDevices){
+							for (MonitoringResource creditorDev: creditorSmartDevices){
+								messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario " + (i + 2)
+										+ ": smart devices " + debtorDev.getId() + " and " + creditorDev.getId() + " evaluate consequent expression", 2));
+								messages.addAll(checkAccessibility(((Commitment) r).getConsequentExpr(), Arrays.asList(debtor,creditor), debtorDev, def));
+								messages.addAll(checkAccessibility(((Commitment) r).getConsequentExpr(), Arrays.asList(debtor,creditor), creditorDev, def));
+								i++;
+							}
 						}
 
 					} catch (ExpressionMissingException e) {
@@ -209,7 +378,7 @@ public class InferDeploymentRequirements {
 
 	}
 
-	private List<ConsoleMessage> checkAccessibility(CommitmentExpression expression, Participant participant,
+	private List<ConsoleMessage> checkAccessibility(CommitmentExpression expression, List<Participant> participants,
 			MonitoringResource monRes, Definitions def) throws ExpressionMissingException {
 
 		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
@@ -220,24 +389,29 @@ public class InferDeploymentRequirements {
 			throw new ExpressionMissingException();
 
 		if (monRes != null) {
-			try {
-				Participant monResOwner = getOwner(monRes, def);
-				if (monResOwner.equals(participant))
-					messages.add(new ConsoleMessage(Severity.INFORMATION,
-							"Participant " + monResOwner.getId() + " is the owner of " + monRes.getId(), indent));
-				else
+			for (Participant participant : participants) {
+
+				try {
+					Participant monResOwner = getOwner(monRes, def);
+					if (monResOwner.equals(participant))
+						messages.add(new ConsoleMessage(Severity.INFORMATION,
+								"Participant " + monResOwner.getId() + " is the owner of " + monRes.getId(), indent));
+					else
+						messages.add(
+								new ConsoleMessage(Severity.WARNING,
+										"Smart device " + monRes.getId() + " must notify participant "
+												+ participant.getId() + " when the expression evaluates to true",
+										indent));
+
+				} catch (OwnerMissingException e) {
 					messages.add(new ConsoleMessage(Severity.WARNING,
 							"Smart device " + monRes.getId() + " must notify participant " + participant.getId()
 									+ " when the expression evaluates to true",
 							indent));
-
-			} catch (OwnerMissingException e) {
-				messages.add(new ConsoleMessage(Severity.WARNING, "Smart device " + monRes.getId()
-						+ " must notify participant " + participant.getId() + " when the expression evaluates to true",
-						indent));
-			} catch (MonitoringResourceMissingException e) {
-				/* should never happen */
-				e.printStackTrace();
+				} catch (MonitoringResourceMissingException e) {
+					/* should never happen */
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -246,28 +420,31 @@ public class InferDeploymentRequirements {
 			try {
 				MonitoringResource res = getMonitoringResource(i, def);
 
-				try {
-					Participant owner = getOwner(res, def);
+				for (Participant participant : participants) {
+					try {
+						Participant owner = getOwner(res, def);
 
-					if (monRes == null) {
+						if (monRes == null) {
 
-						if (owner.equals(participant))
-							messages.add(new ConsoleMessage(Severity.INFORMATION,
-									"Participant " + participant.getId() + " can access " + res.getId(), indent));
-						else
-							messages.add(new ConsoleMessage(Severity.WARNING, "Participant " + owner.getId()
-									+ " must grant access to " + participant.getId() + " on " + res.getId(), indent));
-					} else {
-						if (!monRes.equals(res)) {
-							messages.add(new ConsoleMessage(Severity.WARNING, "Participant " + owner.getId()
-									+ " must grant access to " + monRes.getId() + " on " + res.getId(), indent));
+							if (owner.equals(participant))
+								messages.add(new ConsoleMessage(Severity.INFORMATION,
+										"Participant " + participant.getId() + " can access " + res.getId(), indent));
+							else
+								messages.add(new ConsoleMessage(Severity.WARNING, "Participant " + owner.getId()
+										+ " must grant access to " + participant.getId() + " on " + res.getId(),
+										indent));
+						} else {
+							if (!monRes.equals(res)) {
+								messages.add(new ConsoleMessage(Severity.WARNING, "Participant " + owner.getId()
+										+ " must grant access to " + monRes.getId() + " on " + res.getId(), indent));
+							}
 						}
-					}
-				} catch (OwnerMissingException e) {
-					messages.add(new ConsoleMessage(Severity.WARNING, e.toString(), indent));
-					messages.add(new ConsoleMessage(Severity.WARNING,
-							participant.getId() + " must be granted access on " + res.getId(), indent + 1));
+					} catch (OwnerMissingException e) {
+						messages.add(new ConsoleMessage(Severity.WARNING, e.toString(), indent));
+						messages.add(new ConsoleMessage(Severity.WARNING,
+								participant.getId() + " must be granted access on " + res.getId(), indent + 1));
 
+					}
 				}
 			} catch (MonitoringResourceMissingException e) {
 				messages.add(new ConsoleMessage(Severity.ERROR, e.toString(), indent));
@@ -358,7 +535,7 @@ public class InferDeploymentRequirements {
 
 	}
 
-	private List<MonitoringResource> getSmartDevices(CommitmentExpression expression, Definitions def)
+	private List<MonitoringResource> getSmartDevices(CommitmentExpression expression, Definitions def, Participant owner)
 			throws ExpressionMissingException {
 
 		List<MonitoringResource> list = new ArrayList<MonitoringResource>();
@@ -369,8 +546,9 @@ public class InferDeploymentRequirements {
 		for (ItemDefinition i : expression.getItemRefs()) {
 			try {
 				MonitoringResource res = getMonitoringResource(i, def);
-				if (res.isCanCompute())
-					list.add(res);
+				if (res.isCanCompute()) 
+					if (owner == null || owner.equals(res.getOwnerRef()))
+						list.add(res);
 			} catch (MonitoringResourceMissingException e) {
 				/* do nothing */
 			}

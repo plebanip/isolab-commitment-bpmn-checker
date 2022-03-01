@@ -1031,7 +1031,7 @@ public class BpmnchorEditor extends MultiPageEditorPart
 	 * 
 	 * @generated
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
@@ -1181,7 +1181,6 @@ public class BpmnchorEditor extends MultiPageEditorPart
 		}
 	}
 
-	// TODO: add here invocation for checking constraints
 	public void doCheck() {
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
 
@@ -1191,7 +1190,18 @@ public class BpmnchorEditor extends MultiPageEditorPart
 
 			List<ConsoleMessage> log;
 
-			log = r.infer(resource);
+			Boolean trustfulMonitoring = MessageDialog.openQuestion(getSite().getShell(),
+					"Infer monitoring deployment requirements",
+					"Do the participant trust each other? If so, monitoring requirements will be inferred for a trustful setting. Otherwise, monitoring requirements will be inferred for a trustless setting.");
+
+			if (trustfulMonitoring)
+				log = r.inferTrustful(resource);
+			else
+				log = r.inferTrustless(resource);
+
+			/* add spacing before outputting messages */
+			out.println();
+			
 			for (ConsoleMessage m : log) {
 				out.println(m.toString());
 			}
