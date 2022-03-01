@@ -8,8 +8,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import bpmnchor.*;
 import bpmnchor.Definitions;
+import bpmnchor.infer.exceptions.CommitmentMissingException;
 import bpmnchor.infer.exceptions.ExpressionMissingException;
 import bpmnchor.infer.exceptions.MessageFlowMissingException;
+import bpmnchor.infer.exceptions.MessageMissingException;
 import bpmnchor.infer.exceptions.MonitoringResourceMissingException;
 import bpmnchor.infer.exceptions.OwnerMissingException;
 import bpmnchor.infer.exceptions.ParticipantMissingException;
@@ -38,7 +40,6 @@ public class InferDeploymentRequirements {
 	public List<ConsoleMessage> infer(Resource resource) {
 
 		// TODO: implement trustless monitoring
-		// TODO: implement time windows and provide description
 		Definitions def = (Definitions) resource.getContents().get(0);
 
 		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
@@ -49,7 +50,10 @@ public class InferDeploymentRequirements {
 				messages.add(new ConsoleMessage(Severity.INFORMATION, "checking commitment " + r.getId(), 0));
 
 				try {
-					Participant debtor = getParticipant(((Commitment) r).getScopeBegin());
+					ConnectionPoint begin = getScopeBegin((Commitment) r);
+					ConnectionPoint end = getScopeEnd((Commitment) r);
+
+					Participant debtor = getParticipant(begin);
 
 					/* check antecedent */
 					try {
@@ -57,6 +61,12 @@ public class InferDeploymentRequirements {
 
 						List<MonitoringResource> smartDevices = getSmartDevices(((Commitment) r).getAntecedentExpr(),
 								def);
+
+						try {
+							messages.add(determineValidity((Commitment) r, ExpressionType.ANTECEDENT));
+						} catch (MessageMissingException e) {
+							messages.add(new ConsoleMessage(Severity.ERROR, e.toString() + ", cannot determine antecedent expression validity", 2));
+						}
 
 						if (smartDevices.size() > 0)
 							messages.add(new ConsoleMessage(Severity.INFORMATION,
@@ -86,6 +96,12 @@ public class InferDeploymentRequirements {
 							List<MonitoringResource> smartDevices = getSmartDevices(((Commitment) r).getActiveExpr(),
 									def);
 
+							try {
+								messages.add(determineValidity((Commitment) r, ExpressionType.ACTIVE));
+							} catch (MessageMissingException e) {
+								messages.add(new ConsoleMessage(Severity.ERROR, e.toString() + ", cannot determine active expression validity", 2));
+							}
+
 							if (smartDevices.size() > 0)
 								messages.add(new ConsoleMessage(Severity.INFORMATION,
 										smartDevices.size() + " smart devices can evaluate active expression", 2));
@@ -107,22 +123,19 @@ public class InferDeploymentRequirements {
 						}
 					}
 
-				} catch (ParticipantMissingException e) {
-					messages.add(new ConsoleMessage(Severity.ERROR, e.toString(), 1));
-				} catch (ScopeMissingException e) {
-					messages.add(new ConsoleMessage(Severity.ERROR,
-							"no scope begin defined for commitment " + r.getId(), 1));
-				} catch (MessageFlowMissingException e) {
-					messages.add(new ConsoleMessage(Severity.ERROR, e.toString(), 1));
-				}
-
-				/* check consequent */
-				try {
-					Participant creditor = getParticipant(((Commitment) r).getScopeEnd());
+					/* check consequent */
+					Participant creditor = getParticipant(end);
 					try {
 						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking consequent expression", 1));
+
 						List<MonitoringResource> smartDevices = getSmartDevices(((Commitment) r).getConsequentExpr(),
 								def);
+
+						try {
+							messages.add(determineValidity((Commitment) r, ExpressionType.CONSEQUENT));
+						} catch (MessageMissingException e) {
+							messages.add(new ConsoleMessage(Severity.ERROR, e.toString() + ", cannot determine consequent expression validity", 2));
+						}
 
 						if (smartDevices.size() > 0)
 							messages.add(new ConsoleMessage(Severity.INFORMATION,
@@ -144,11 +157,11 @@ public class InferDeploymentRequirements {
 						messages.add(new ConsoleMessage(Severity.ERROR,
 								"no consequent expression defined for commitment " + r.getId(), 2));
 					}
-				} catch (ScopeMissingException e) {
-					messages.add(
-							new ConsoleMessage(Severity.ERROR, "no scope end defined for commitment " + r.getId(), 1));
-				} catch (MessageFlowMissingException | ParticipantMissingException e) {
+				} catch (MessageFlowMissingException | ParticipantMissingException | ScopeMissingException e) {
 					messages.add(new ConsoleMessage(Severity.ERROR, e.toString(), 1));
+				} catch (CommitmentMissingException e1) {
+					/* should never happen */
+					e1.printStackTrace();
 				}
 
 			}
@@ -161,6 +174,41 @@ public class InferDeploymentRequirements {
 		return messages;
 	}
 
+	private ConsoleMessage determineValidity(Commitment r, ExpressionType eType) throws CommitmentMissingException,
+			ScopeMissingException, MessageFlowMissingException, MessageMissingException {
+
+		ConnectionPoint begin = getScopeBegin(r);
+		ConnectionPoint end = getScopeEnd(r);
+
+		Message beginMsg = getMessage(begin);
+		Message endMsg = getMessage(end);
+
+		String beginEvent = "";
+		String endEvent = "";
+
+		if (begin.getSide() == MessageType.RECEIVE)
+			beginEvent = "received";
+		else
+			beginEvent = "sent";
+
+		if (end.getSide() == MessageType.RECEIVE)
+			endEvent = "received";
+		else
+			endEvent = "sent";
+
+		Integer indent = 2;
+
+		if (r.getType() == CommitmentType.GOAL && eType == ExpressionType.CONSEQUENT) {
+			return new ConsoleMessage(Severity.INFORMATION,
+					"Consequent expression is evaluated when message " + endMsg.getId() + " is " + endEvent, indent);
+		} else {
+			return new ConsoleMessage(Severity.INFORMATION, "Antecedent expression is evaluated from when message "
+					+ beginMsg.getId() + " is " + beginEvent + " until message " + endMsg.getId() + " is " + endEvent,
+					indent);
+		}
+
+	}
+
 	private List<ConsoleMessage> checkAccessibility(CommitmentExpression expression, Participant participant,
 			MonitoringResource monRes, Definitions def) throws ExpressionMissingException {
 
@@ -171,7 +219,6 @@ public class InferDeploymentRequirements {
 		if (expression == null)
 			throw new ExpressionMissingException();
 
-		
 		if (monRes != null) {
 			try {
 				Participant monResOwner = getOwner(monRes, def);
@@ -250,12 +297,37 @@ public class InferDeploymentRequirements {
 			throw new OwnerMissingException(r);
 	}
 
-	private Participant getParticipant(ConnectionPoint scope)
-			throws ScopeMissingException, MessageFlowMissingException, ParticipantMissingException {
+	private ConnectionPoint getScopeBegin(Commitment c) throws CommitmentMissingException, ScopeMissingException {
+		if (c == null)
+			throw new CommitmentMissingException();
+		ConnectionPoint scope = c.getScopeBegin();
+		if (scope == null)
+			throw new ScopeMissingException(c);
+		return scope;
+	}
+
+	private ConnectionPoint getScopeEnd(Commitment c) throws CommitmentMissingException, ScopeMissingException {
+		if (c == null)
+			throw new CommitmentMissingException();
+		ConnectionPoint scope = c.getScopeEnd();
+		if (scope == null)
+			throw new ScopeMissingException(c);
+		return scope;
+	}
+
+	private MessageFlow getMessageFlow(ConnectionPoint scope) throws ScopeMissingException {
 		if (scope == null)
 			throw new ScopeMissingException();
 
 		MessageFlow mf = scope.getMessageFlowRef();
+
+		return mf;
+	}
+
+	private Participant getParticipant(ConnectionPoint scope)
+			throws ScopeMissingException, MessageFlowMissingException, ParticipantMissingException {
+
+		MessageFlow mf = getMessageFlow(scope);
 		if (mf == null)
 			throw new MessageFlowMissingException(scope);
 
@@ -270,6 +342,20 @@ public class InferDeploymentRequirements {
 		if (n instanceof Participant)
 			return (Participant) n;
 		throw new ParticipantMissingException(mf);
+	}
+
+	private Message getMessage(ConnectionPoint scope)
+			throws ScopeMissingException, MessageFlowMissingException, MessageMissingException {
+
+		MessageFlow mf = getMessageFlow(scope);
+		if (mf == null)
+			throw new MessageFlowMissingException(scope);
+
+		if (mf.getMessageRef() == null)
+			throw new MessageMissingException(mf);
+
+		return mf.getMessageRef();
+
 	}
 
 	private List<MonitoringResource> getSmartDevices(CommitmentExpression expression, Definitions def)
