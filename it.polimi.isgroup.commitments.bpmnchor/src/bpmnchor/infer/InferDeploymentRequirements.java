@@ -264,8 +264,8 @@ public class InferDeploymentRequirements {
 								messages.add(new ConsoleMessage(Severity.INFORMATION,
 										debtorSmartDevices.size() + " smart devices of " + debtor.getId() + " and " + creditorSmartDevices.size() + " smart devices of " + creditor.getId() + " can evaluate active expression", 2));
 
-							messages.add(new ConsoleMessage(Severity.INFORMATION,
-									"Scenario 1: participant " + debtor.getId() + " evaluates active expression", 2));
+							messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario 1: participants "
+									+ debtor.getId() + " and " + creditor.getId() + " evaluate active expression", 2));
 							messages.addAll(checkAccessibility(((Commitment) r).getActiveExpr(), Arrays.asList(debtor,creditor), null, def));
 
 							Integer i = 0;
@@ -306,8 +306,8 @@ public class InferDeploymentRequirements {
 							messages.add(new ConsoleMessage(Severity.INFORMATION,
 									debtorSmartDevices.size() + " smart devices of " + debtor.getId() + " and " + creditorSmartDevices.size() + " smart devices of " + creditor.getId() + " can evaluate consequent expression", 2));
 
-						messages.add(new ConsoleMessage(Severity.INFORMATION,
-								"Scenario 1: participant " + creditor.getId() + " evaluates consequent expression", 2));
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "Scenario 1: participants "
+								+ debtor.getId() + " and " + creditor.getId() + " evaluate consequent expression", 2));
 						messages.addAll(checkAccessibility(((Commitment) r).getConsequentExpr(), Arrays.asList(debtor,creditor), null, def));
 
 						Integer i = 0;

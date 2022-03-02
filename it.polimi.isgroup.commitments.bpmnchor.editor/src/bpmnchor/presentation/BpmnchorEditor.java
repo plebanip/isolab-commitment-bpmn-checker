@@ -1181,11 +1181,14 @@ public class BpmnchorEditor extends MultiPageEditorPart
 		}
 	}
 
-	public void doCheck() {
+	public String doCheck() {
+		
+		String consoleName = null;
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
 
+			consoleName = resource.getURI().path();
 			InferDeploymentRequirements r = new InferDeploymentRequirements();
-			MessageConsole myConsole = BpmnchorActionBarContributor.findConsole("MyConsole");
+			MessageConsole myConsole = BpmnchorActionBarContributor.findConsole(consoleName);
 			MessageConsoleStream out = myConsole.newMessageStream();
 
 			List<ConsoleMessage> log;
@@ -1217,6 +1220,8 @@ public class BpmnchorEditor extends MultiPageEditorPart
 			}
 
 		}
+		
+		return consoleName;
 	}
 
 	/**

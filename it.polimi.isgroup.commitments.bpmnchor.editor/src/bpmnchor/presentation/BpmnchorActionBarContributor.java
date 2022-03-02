@@ -46,48 +46,45 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
 
-
 /**
- * This is the action bar contributor for the Bpmnchor model editor.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the action bar contributor for the Bpmnchor model editor. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class BpmnchorActionBarContributor
-	extends EditingDomainActionBarContributor
-	implements ISelectionChangedListener {
-	
+public class BpmnchorActionBarContributor extends EditingDomainActionBarContributor
+		implements ISelectionChangedListener {
+
 	public static MessageConsole findConsole(String name) {
-	      ConsolePlugin plugin = ConsolePlugin.getDefault();
-	      IConsoleManager conMan = plugin.getConsoleManager();
-	      IConsole[] existing = conMan.getConsoles();
-	      for (int i = 0; i < existing.length; i++)
-	         if (name.equals(existing[i].getName()))
-	            return (MessageConsole) existing[i];
-	      //no console found, so create a new one
-	      MessageConsole myConsole = new MessageConsole(name, null);
-	      conMan.addConsoles(new IConsole[]{myConsole});
-	      return myConsole;
+		ConsolePlugin plugin = ConsolePlugin.getDefault();
+		IConsoleManager conMan = plugin.getConsoleManager();
+		IConsole[] existing = conMan.getConsoles();
+		for (int i = 0; i < existing.length; i++)
+			if (name.equals(existing[i].getName()))
+				return (MessageConsole) existing[i];
+		// no console found, so create a new one
+		MessageConsole myConsole = new MessageConsole(name, null);
+		conMan.addConsoles(new IConsole[] { myConsole });
+		return myConsole;
 	}
-	
-	
+
 	/**
-	 * This keeps track of the active editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the active editor. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IEditorPart activeEditorPart;
 
 	/**
-	 * This keeps track of the current selection provider.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the current selection provider. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ISelectionProvider selectionProvider;
 
-	protected IAction importBPMNAction = new Action ("Import BPMN choreography diagram") {
+	protected IAction importBPMNAction = new Action("Import BPMN choreography diagram") {
 		@Override
 		public void run() {
 			IWorkbenchPage page = getPage();
@@ -95,128 +92,139 @@ public class BpmnchorActionBarContributor
 			editor.doImportBPMN();
 		}
 	};
-	
-	protected IAction checkAction = new Action ("Infer deployment requirements") {
+
+	protected IAction checkAction = new Action("Infer deployment requirements") {
 		@Override
 		public void run() {
 			IWorkbenchPage page = getPage();
 			BpmnchorEditor editor = (BpmnchorEditor) page.getActiveEditor();
-			editor.doCheck();
+			String id = IConsoleConstants.ID_CONSOLE_VIEW;
+
+			String consoleName = editor.doCheck();
+
+			if (consoleName != null) {
+				try {
+					IConsoleView view = (IConsoleView) page.showView(id);
+					view.display(findConsole(consoleName));
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	};
-	
-	
-	protected IAction showConsoleAction = new Action(
-			"Show Console") //$NON-NLS-1$
+
+	protected IAction showConsoleAction = new Action("Show Console") //$NON-NLS-1$
 	{
 		@Override
 		public void run() {
 			IWorkbenchPage page = getPage();
 			String id = IConsoleConstants.ID_CONSOLE_VIEW;
-			  try {
-				IConsoleView view = (IConsoleView) page.showView(id);
-				view.display(findConsole("MyConsole"));
+			try {
+				page.showView(id);
 			} catch (PartInitException e) {
 				e.printStackTrace();
 			}
 		}
 	};
-	
+
 	/**
-	 * This action opens the Properties view.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This action opens the Properties view. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	protected IAction showPropertiesViewAction =
-		new Action(BpmnchorEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
-			@Override
-			public void run() {
-				try {
-					getPage().showView("org.eclipse.ui.views.PropertySheet");
-				}
-				catch (PartInitException exception) {
-					BpmnchorEditorPlugin.INSTANCE.log(exception);
-				}
+	protected IAction showPropertiesViewAction = new Action(
+			BpmnchorEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
+		@Override
+		public void run() {
+			try {
+				getPage().showView("org.eclipse.ui.views.PropertySheet");
+			} catch (PartInitException exception) {
+				BpmnchorEditorPlugin.INSTANCE.log(exception);
 			}
-		};
+		}
+	};
 
 	/**
 	 * This action refreshes the viewer of the current editor if the editor
-	 * implements {@link org.eclipse.emf.common.ui.viewer.IViewerProvider}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * implements {@link org.eclipse.emf.common.ui.viewer.IViewerProvider}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	protected IAction refreshViewerAction =
-		new Action(BpmnchorEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
-			@Override
-			public boolean isEnabled() {
-				return activeEditorPart instanceof IViewerProvider;
-			}
+	protected IAction refreshViewerAction = new Action(
+			BpmnchorEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
+		@Override
+		public boolean isEnabled() {
+			return activeEditorPart instanceof IViewerProvider;
+		}
 
-			@Override
-			public void run() {
-				if (activeEditorPart instanceof IViewerProvider) {
-					Viewer viewer = ((IViewerProvider)activeEditorPart).getViewer();
-					if (viewer != null) {
-						viewer.refresh();
-					}
+		@Override
+		public void run() {
+			if (activeEditorPart instanceof IViewerProvider) {
+				Viewer viewer = ((IViewerProvider) activeEditorPart).getViewer();
+				if (viewer != null) {
+					viewer.refresh();
 				}
 			}
-		};
+		}
+	};
 
 	/**
-	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
-	 * generated for the current selection by the item provider.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This will contain one
+	 * {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to
+	 * each descriptor generated for the current selection by the item provider.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> createChildActions;
 
 	/**
-	 * This is the menu manager into which menu contribution items should be added for CreateChild actions.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the menu manager into which menu contribution items should be
+	 * added for CreateChild actions. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	protected IMenuManager createChildMenuManager;
 
 	/**
-	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} corresponding to each descriptor
-	 * generated for the current selection by the item provider.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This will contain one
+	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} corresponding
+	 * to each descriptor generated for the current selection by the item
+	 * provider. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> createSiblingActions;
 
 	/**
-	 * This is the menu manager into which menu contribution items should be added for CreateSibling actions.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the menu manager into which menu contribution items should be
+	 * added for CreateSibling actions. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IMenuManager createSiblingMenuManager;
 
 	/**
-	 * This creates an instance of the contributor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This creates an instance of the contributor. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public BpmnchorActionBarContributor() {
 		super(ADDITIONS_LAST_STYLE);
 		loadResourceAction = new LoadResourceAction();
-		//validateAction = new ValidateAction();
+		// validateAction = new ValidateAction();
 		controlAction = new ControlAction();
 	}
 
 	/**
-	 * This adds Separators for editor additions to the tool bar.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds Separators for editor additions to the tool bar. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -226,17 +234,18 @@ public class BpmnchorActionBarContributor
 	}
 
 	/**
-	 * This adds to the menu bar a menu and some separators for editor additions,
-	 * as well as the sub-menus for object creation items.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds to the menu bar a menu and some separators for editor
+	 * additions, as well as the sub-menus for object creation items. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(BpmnchorEditorPlugin.INSTANCE.getString("_UI_BpmnchorEditor_menu"), "bpmnchorMenuID");
+		IMenuManager submenuManager = new MenuManager(
+				BpmnchorEditorPlugin.INSTANCE.getString("_UI_BpmnchorEditor_menu"), "bpmnchorMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));
@@ -250,25 +259,26 @@ public class BpmnchorActionBarContributor
 
 		// Prepare for CreateSibling item addition or removal.
 		//
-		createSiblingMenuManager = new MenuManager(BpmnchorEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		createSiblingMenuManager = new MenuManager(
+				BpmnchorEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
 		submenuManager.insertBefore("additions", createSiblingMenuManager);
 
 		// Force an update because Eclipse hides empty menus now.
 		//
-		submenuManager.addMenuListener
-			(new IMenuListener() {
-				 public void menuAboutToShow(IMenuManager menuManager) {
-					 menuManager.updateAll(true);
-				 }
-			 });
+		submenuManager.addMenuListener(new IMenuListener() {
+			public void menuAboutToShow(IMenuManager menuManager) {
+				menuManager.updateAll(true);
+			}
+		});
 
 		addGlobalActions(submenuManager);
 	}
 
 	/**
-	 * When the active editor changes, this remembers the change and registers with it as a selection provider.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * When the active editor changes, this remembers the change and registers
+	 * with it as a selection provider. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -283,8 +293,7 @@ public class BpmnchorActionBarContributor
 		}
 		if (part == null) {
 			selectionProvider = null;
-		}
-		else {
+		} else {
 			selectionProvider = part.getSite().getSelectionProvider();
 			selectionProvider.addSelectionChangedListener(this);
 
@@ -297,11 +306,13 @@ public class BpmnchorActionBarContributor
 	}
 
 	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionChangedListener},
-	 * handling {@link org.eclipse.jface.viewers.SelectionChangedEvent}s by querying for the children and siblings
-	 * that can be added to the selected object and updating the menus accordingly.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This implements
+	 * {@link org.eclipse.jface.viewers.ISelectionChangedListener}, handling
+	 * {@link org.eclipse.jface.viewers.SelectionChangedEvent}s by querying for
+	 * the children and siblings that can be added to the selected object and
+	 * updating the menus accordingly. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -320,10 +331,10 @@ public class BpmnchorActionBarContributor
 		Collection<?> newSiblingDescriptors = null;
 
 		ISelection selection = event.getSelection();
-		if (selection instanceof IStructuredSelection && ((IStructuredSelection)selection).size() == 1) {
-			Object object = ((IStructuredSelection)selection).getFirstElement();
+		if (selection instanceof IStructuredSelection && ((IStructuredSelection) selection).size() == 1) {
+			Object object = ((IStructuredSelection) selection).getFirstElement();
 
-			EditingDomain domain = ((IEditingDomainProvider)activeEditorPart).getEditingDomain();
+			EditingDomain domain = ((IEditingDomainProvider) activeEditorPart).getEditingDomain();
 
 			newChildDescriptors = domain.getNewChildDescriptors(object, null);
 			newSiblingDescriptors = domain.getNewChildDescriptors(null, object);
@@ -345,10 +356,10 @@ public class BpmnchorActionBarContributor
 	}
 
 	/**
-	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateChildAction} for each object in <code>descriptors</code>,
-	 * and returns the collection of these actions.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateChildAction}
+	 * for each object in <code>descriptors</code>, and returns the collection
+	 * of these actions. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
@@ -362,10 +373,11 @@ public class BpmnchorActionBarContributor
 	}
 
 	/**
-	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} for each object in <code>descriptors</code>,
-	 * and returns the collection of these actions.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This generates a
+	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} for each
+	 * object in <code>descriptors</code>, and returns the collection of these
+	 * actions. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
@@ -379,32 +391,36 @@ public class BpmnchorActionBarContributor
 	}
 
 	/**
-	 * This populates the specified <code>manager</code> with {@link org.eclipse.jface.action.ActionContributionItem}s
-	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection,
-	 * by inserting them before the specified contribution item <code>contributionID</code>.
-	 * If <code>contributionID</code> is <code>null</code>, they are simply added.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This populates the specified <code>manager</code> with
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
+	 * {@link org.eclipse.jface.action.IAction}s contained in the
+	 * <code>actions</code> collection, by inserting them before the specified
+	 * contribution item <code>contributionID</code>. If
+	 * <code>contributionID</code> is <code>null</code>, they are simply added.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions, String contributionID) {
+	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions,
+			String contributionID) {
 		if (actions != null) {
 			for (IAction action : actions) {
 				if (contributionID != null) {
 					manager.insertBefore(contributionID, action);
-				}
-				else {
+				} else {
 					manager.add(action);
 				}
 			}
 		}
 	}
-		
+
 	/**
-	 * This removes from the specified <code>manager</code> all {@link org.eclipse.jface.action.ActionContributionItem}s
-	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This removes from the specified <code>manager</code> all
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
+	 * {@link org.eclipse.jface.action.IAction}s contained in the
+	 * <code>actions</code> collection. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
@@ -415,13 +431,13 @@ public class BpmnchorActionBarContributor
 				//
 				IContributionItem contributionItem = items[i];
 				while (contributionItem instanceof SubContributionItem) {
-					contributionItem = ((SubContributionItem)contributionItem).getInnerItem();
+					contributionItem = ((SubContributionItem) contributionItem).getInnerItem();
 				}
 
 				// Delete the ActionContributionItems with matching action.
 				//
 				if (contributionItem instanceof ActionContributionItem) {
-					IAction action = ((ActionContributionItem)contributionItem).getAction();
+					IAction action = ((ActionContributionItem) contributionItem).getAction();
 					if (actions.contains(action)) {
 						manager.remove(contributionItem);
 					}
@@ -431,9 +447,9 @@ public class BpmnchorActionBarContributor
 	}
 
 	/**
-	 * This populates the pop-up menu before it appears.
-	 * <!-- begin-user-doc -->
+	 * This populates the pop-up menu before it appears. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -451,31 +467,31 @@ public class BpmnchorActionBarContributor
 	}
 
 	/**
-	 * This inserts global actions before the "additions-end" separator.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This inserts global actions before the "additions-end" separator. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
-		
+
 		menuManager.insertBefore("additions", importBPMNAction); //$NON-NLS-1$
 		menuManager.insertBefore("additions", checkAction); //$NON-NLS-1$
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
 
-		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
+		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());
 		menuManager.insertAfter("ui-actions", refreshViewerAction);
-		
+
 		menuManager.insertAfter("ui-actions", showConsoleAction); //$NON-NLS-1$
 
 		super.addGlobalActions(menuManager);
 	}
 
 	/**
-	 * This ensures that a delete action will clean up all references to deleted objects.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This ensures that a delete action will clean up all references to deleted
+	 * objects. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
