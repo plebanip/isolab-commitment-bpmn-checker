@@ -4,7 +4,7 @@
     modelName="Bpmnchor" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
     copyrightFields="false" providerRootExtendsClass="" usedGenPackages="../../org.eclipse.bpmn2/model/BPMN20.genmodel#//bpmn2 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//di.1 ../../org.eclipse.bpmn2/model/BPMN20.genmodel#//dc"
-    operationReflection="true" importOrganizing="true">
+    operationReflection="true" runtimePlatform="RCP" importOrganizing="true">
   <foreignModel>bpmnchor.ecore</foreignModel>
   <genPackages prefix="Bpmnchor" resource="XMI" disposableProviderFactory="true" loadInitialization="true"
       multipleEditorPages="false" contentTypeIdentifier="" ecorePackage="bpmnchor.ecore#/"

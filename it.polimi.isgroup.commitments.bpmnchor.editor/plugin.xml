@@ -6,22 +6,90 @@
 
 <plugin>
 
-   <extension point="org.eclipse.ui.newWizards">
+   <extension
+         point="org.eclipse.core.runtime.applications"
+         id="BpmnchorEditorAdvisorApplication">
       <!-- @generated bpmnchor -->
-      <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
-            name="%_UI_Wizard_category"/>
-      <wizard
-            id="bpmnchor.presentation.BpmnchorModelWizardID"
-            name="%_UI_BpmnchorModelWizard_label"
-            class="bpmnchor.presentation.BpmnchorModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/BpmnchorModelFile.gif">
-         <description>%_UI_BpmnchorModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
+      <application>
+         <run class="bpmnchor.presentation.BpmnchorEditorAdvisor$Application"/>
+      </application>
    </extension>
 
+
+   <extension point="org.eclipse.ui.perspectives">
+      <!-- @generated bpmnchor -->
+      <perspective
+            name="%_UI_Perspective_label"
+            class="bpmnchor.presentation.BpmnchorEditorAdvisor$Perspective"
+            id="bpmnchor.presentation.BpmnchorEditorAdvisorPerspective">
+      </perspective>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands">
+      <!-- @generated bpmnchor -->
+      <command
+            name="%_UI_Menu_OpenURI_label"
+            description="%_UI_Menu_OpenURI_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="bpmnchor.presentation.BpmnchorEditorAdvisorOpenURICommand"/>
+      <command
+            name="%_UI_Menu_Open_label"
+            description="%_UI_Menu_Open_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="bpmnchor.presentation.BpmnchorEditorAdvisorOpenCommand"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.bindings">
+      <!-- @generated bpmnchor -->
+      <key
+            commandId="bpmnchor.presentation.BpmnchorEditorAdvisorOpenURICommand"
+            sequence="M1+U"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            commandId="bpmnchor.presentation.BpmnchorEditorAdvisorOpenCommand"
+            sequence="M1+O"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated bpmnchor -->
+      <actionSet
+            label="%_UI_BpmnchorEditorAdvisor_ActionSet_label"
+            visible="true"
+            id="BpmnchorEditorAdvisorActionSet">
+         <action
+               label="%_UI_Menu_About_label"
+               class="bpmnchor.presentation.BpmnchorEditorAdvisor$AboutAction"
+               menubarPath="help/additions"
+               id="bpmnchor.presentation.BpmnchorEditorAdvisorAboutAction"/>
+         <action
+               label="%_UI_Menu_OpenURI_label"
+               definitionId="bpmnchor.presentation.BpmnchorEditorAdvisorOpenURICommand"
+               class="bpmnchor.presentation.BpmnchorEditorAdvisor$OpenURIAction"
+               menubarPath="file/additions"
+               id="bpmnchor.presentation.BpmnchorEditorAdvisorOpenURIAction"/>
+         <action
+               label="%_UI_Menu_Open_label"
+               definitionId="bpmnchor.presentation.BpmnchorEditorAdvisorOpenCommand"
+               class="bpmnchor.presentation.BpmnchorEditorAdvisor$OpenAction"
+               menubarPath="file/additions"
+               id="bpmnchor.presentation.BpmnchorEditorAdvisorOpenAction"/>
+      </actionSet>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated bpmnchor -->
+      <actionSet
+            label="%_UI_BpmnchorModelWizard_ActionSet_label"
+            visible="true"
+            id="bpmnchor.presentation.BpmnchorActionBarContributorActionSet">
+         <action
+               label="%_UI_BpmnchorModelWizard_label"
+               class="bpmnchor.presentation.BpmnchorActionBarContributor$NewAction"
+               menubarPath="file/new/additions"
+               id="bpmnchor.presentation.BpmnchorActionBarContributorNewAction"/>
+      </actionSet>
+   </extension>
    <extension point="org.eclipse.ui.editors">
       <!-- @generated bpmnchor -->
       <editor
