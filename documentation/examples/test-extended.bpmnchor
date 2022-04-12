@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmnchor:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" xmlns:bpmnchor="http://www.example.org/bpmnchor" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.2.3.CR2-v20160209-2002" targetNamespace="http://org.eclipse.bpmn2/default/choreography">
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="PackageDef" itemKind="Physical"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="ReceiptDef"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="InvoiceDef"/>
+  <rootElements xsi:type="bpmn2:Message" id="m1" itemRef="PackageDef" name="m1"/>
+  <rootElements xsi:type="bpmn2:Message" id="m2" itemRef="ReceiptDef" name="m2"/>
+  <rootElements xsi:type="bpmn2:Message" id="m3" itemRef="InvoiceDef" name="m3"/>
+  <rootElements xsi:type="bpmn2:Message" id="m1a" itemRef="PackageDef" name="m1a"/>
+  <rootElements xsi:type="bpmn2:Choreography" id="Choreography_1" name="Default Choreography">
+    <participants id="A" name="A"/>
+    <participants id="B" name="B"/>
+    <participants id="C" name="C"/>
+    <messageFlows id="MessageFlow_m1" messageRef="m1" name="MessageFlow_m1" sourceRef="A" targetRef="B"/>
+    <messageFlows id="MessageFlow_m2" messageRef="m2" name="MessageFlow_m2" sourceRef="B" targetRef="A"/>
+    <messageFlows id="MessageFlow_m3" messageRef="m3" name="MessageFlow_m3" sourceRef="C" targetRef="B"/>
+    <messageFlows id="MessageFlow_m1a" messageRef="m1a" name="MessageFlow_m1a" sourceRef="B" targetRef="C"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="Task_1" name="Task 1" incoming="SequenceFlow_1" outgoing="SequenceFlow_2" participantRefs="A B" initiatingParticipantRef="A" messageFlowRef="MessageFlow_m1 MessageFlow_m2"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="Task_2" name="Task 2" incoming="SequenceFlow_2" outgoing="SequenceFlow_3" participantRefs="B C" initiatingParticipantRef="B" messageFlowRef="MessageFlow_m3 MessageFlow_m1a"/>
+    <flowElements xsi:type="bpmn2:EndEvent" id="EndEvent_1" name="End Event 1" incoming="SequenceFlow_3"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_2" sourceRef="Task_1" targetRef="Task_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_3" sourceRef="Task_2" targetRef="EndEvent_1"/>
+    <flowElements xsi:type="bpmn2:StartEvent" id="StartEvent_1" name="Start Event 1" outgoing="SequenceFlow_1"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="Package" canCompute="true" ownerRef="A" itemRef="PackageDef"/>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="Receipt" type="API" ownerRef="B" itemRef="ReceiptDef"/>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="Invoice" type="API" ownerRef="C" itemRef="InvoiceDef"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1C2_AntecedentExpression" language="" body="(package is not damaged)" itemRefs="PackageDef"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1_ConsequentExpression" body="(receipt is signed)" itemRefs="ReceiptDef"/>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C1" antecedentExpr="C1C2_AntecedentExpression" consequentExpr="C1_ConsequentExpression">
+    <scopeBegin id="C1_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_m1"/>
+    <scopeEnd id="C1_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_m2"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C2" antecedentExpr="C1C2_AntecedentExpression" consequentExpr="C2_ConsequentExpression">
+    <scopeBegin id="C2_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_m1"/>
+    <scopeEnd id="C2_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_m1a"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_ConsequentExpression" body="(package arrives within 2 days)" itemRefs="PackageDef"/>
+</bpmnchor:Definitions>

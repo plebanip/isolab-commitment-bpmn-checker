@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmnchor:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" xmlns:bpmnchor="http://www.example.org/bpmnchor" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.2.3.CR2-v20160209-2002" targetNamespace="http://org.eclipse.bpmn2/default/choreography">
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="OrderDef"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="ConfirmationDef"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="ShipmentOrderDef"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="FishDef" itemKind="Physical"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="PlanDef"/>
+  <rootElements xsi:type="bpmn2:Message" id="OrderMsg" itemRef="OrderDef" name="Order"/>
+  <rootElements xsi:type="bpmn2:Message" id="ConfirmationMsg" itemRef="ConfirmationDef" name="Confirmation"/>
+  <rootElements xsi:type="bpmn2:Message" id="ShipmentOrderMsg" itemRef="ShipmentOrderDef" name="Shipment order"/>
+  <rootElements xsi:type="bpmn2:Message" id="FishFromSeaCOMsg" itemRef="FishDef" name="Fish (from Sea CO)"/>
+  <rootElements xsi:type="bpmn2:Message" id="PlanMsg" itemRef="PlanDef" name="Plan"/>
+  <rootElements xsi:type="bpmn2:Message" id="FishFromLocalCourierMsg" itemRef="FishDef" name="Fish (from local courier)"/>
+  <rootElements xsi:type="bpmn2:Message" id="FishFromLongHaulCourierMsg" itemRef="FishDef" name="Fish (from long-haul courier)"/>
+  <rootElements xsi:type="bpmn2:Message" id="FishToCustomerMsg" itemRef="FishDef" name="Fish (to customer)"/>
+  <rootElements xsi:type="bpmn2:Choreography" id="Choreography_1" name="Default Choreography">
+    <participants id="Customer" name="Customer"/>
+    <participants id="SeaCO" name="Sea CO"/>
+    <participants id="Participant_3" name="New Participant"/>
+    <participants id="LocalCourier" name="Local courier"/>
+    <participants id="Participant_5" name="New Participant"/>
+    <participants id="Participant_6" name="New Participant"/>
+    <participants id="Participant_7" name="New Participant"/>
+    <participants id="Participant_8" name="New Participant"/>
+    <participants id="LongHaulCourier" name="Long-haul courier"/>
+    <participants id="Participant_10" name="New Participant"/>
+    <participants id="Participant_11" name="New Participant"/>
+    <participants id="Participant_12" name="New Participant"/>
+    <participants id="Participant_13" name="New Participant"/>
+    <participants id="Participant_14" name="New Participant"/>
+    <messageFlows id="OrderMF" messageRef="OrderMsg" name="Message Flow Order" sourceRef="Customer" targetRef="SeaCO"/>
+    <messageFlows id="ConfirmationMF" messageRef="ConfirmationMsg" name="Message Flow Confirmation" sourceRef="SeaCO" targetRef="Customer"/>
+    <messageFlows id="ShipmentOrderMF" messageRef="ShipmentOrderMsg" name="Message Flow Shipment order" sourceRef="SeaCO" targetRef="LocalCourier"/>
+    <messageFlows id="FishFromSeaCOMF" messageRef="FishFromSeaCOMsg" name="Message Flow Fish from Sea CO" sourceRef="SeaCO" targetRef="LocalCourier"/>
+    <messageFlows id="PlanMF" messageRef="PlanMsg" name="Message Flow Plan" sourceRef="LocalCourier" targetRef="SeaCO"/>
+    <messageFlows id="FishFromLocalCourierMF" messageRef="FishFromLocalCourierMsg" name="Message Flow Fish from local courier" sourceRef="LocalCourier" targetRef="LongHaulCourier"/>
+    <messageFlows id="FishFromLongHaulCourierMF" messageRef="FishFromLongHaulCourierMsg" name="Message Flow Fish from long-haul courier" sourceRef="LongHaulCourier" targetRef="LocalCourier"/>
+    <messageFlows id="FishToCustomerMF" messageRef="FishToCustomerMsg" name="Message Flow Fish to customer" sourceRef="LocalCourier" targetRef="Customer"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="HandleOrder" name="Handle order" incoming="SequenceFlow_1" outgoing="SequenceFlow_2" participantRefs="Customer SeaCO" initiatingParticipantRef="Customer" messageFlowRef="OrderMF ConfirmationMF"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="PlanShipment" name="Plan shipment" incoming="SequenceFlow_3" outgoing="SequenceFlow_4" participantRefs="SeaCO LocalCourier" initiatingParticipantRef="SeaCO" messageFlowRef="ShipmentOrderMF"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="FirstMileDelivery" name="First mile delivery" incoming="SequenceFlow_4" outgoing="SequenceFlow_5" participantRefs="SeaCO LocalCourier" initiatingParticipantRef="SeaCO" messageFlowRef="FishFromSeaCOMF PlanMF"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="LongDistanceDelivery" name="Long distance delivery" incoming="SequenceFlow_6" outgoing="SequenceFlow_7" participantRefs="LocalCourier LongHaulCourier" initiatingParticipantRef="LocalCourier" messageFlowRef="FishFromLocalCourierMF"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="LongDistanceEnd" name="Long distance end" incoming="SequenceFlow_7" outgoing="SequenceFlow_8" participantRefs="LongHaulCourier LocalCourier" initiatingParticipantRef="LongHaulCourier" messageFlowRef="FishFromLongHaulCourierMF"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="LastMileDelivery" name="Last mile delivery" incoming="SequenceFlow_9" outgoing="SequenceFlow_10" participantRefs="LocalCourier Customer" initiatingParticipantRef="LocalCourier" messageFlowRef="FishToCustomerMF"/>
+    <flowElements xsi:type="bpmn2:EndEvent" id="EndEvent_1" name="End Event 1" incoming="SequenceFlow_11"/>
+    <flowElements xsi:type="bpmn2:EndEvent" id="EndEvent_2" name="End Event 2" incoming="SequenceFlow_10"/>
+    <flowElements xsi:type="bpmn2:ExclusiveGateway" id="ExclusiveGateway_1" name="Reject order?" incoming="SequenceFlow_2" outgoing="SequenceFlow_3 SequenceFlow_11" gatewayDirection="Diverging"/>
+    <flowElements xsi:type="bpmn2:ExclusiveGateway" id="ExclusiveGateway_2" name="Long distance?" incoming="SequenceFlow_5" outgoing="SequenceFlow_6 SequenceFlow_12" gatewayDirection="Diverging"/>
+    <flowElements xsi:type="bpmn2:ExclusiveGateway" id="ExclusiveGateway_3" incoming="SequenceFlow_8 SequenceFlow_12" outgoing="SequenceFlow_9" gatewayDirection="Converging"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="HandleOrder"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_2" sourceRef="HandleOrder" targetRef="ExclusiveGateway_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_3" sourceRef="ExclusiveGateway_1" targetRef="PlanShipment"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_4" sourceRef="PlanShipment" targetRef="FirstMileDelivery"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_5" sourceRef="FirstMileDelivery" targetRef="ExclusiveGateway_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_6" sourceRef="ExclusiveGateway_2" targetRef="LongDistanceDelivery"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_7" sourceRef="LongDistanceDelivery" targetRef="LongDistanceEnd"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_8" sourceRef="LongDistanceEnd" targetRef="ExclusiveGateway_3"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_9" sourceRef="ExclusiveGateway_3" targetRef="LastMileDelivery"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_10" sourceRef="LastMileDelivery" targetRef="EndEvent_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_11" sourceRef="ExclusiveGateway_1" targetRef="EndEvent_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_12" sourceRef="ExclusiveGateway_2" targetRef="ExclusiveGateway_3"/>
+    <flowElements xsi:type="bpmn2:StartEvent" id="StartEvent_1" name="Start Event 1" outgoing="SequenceFlow_1"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="FishRes" endpoint="" canCompute="true" ownerRef="SeaCO" itemRef="FishDef"/>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C1" antecedentExpr="C1_AntecedentExpr" consequentExpr="C1_ConsequentExpr">
+    <scopeBegin id="C1_ScopeBegin" side="Receive" messageFlowRef="OrderMF"/>
+    <scopeEnd id="C1_ScopeEnd" side="Receive" messageFlowRef="ConfirmationMF"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1_AntecedentExpr" body="true"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1_ConsequentExpr" body="(confirmation arrives within 5 days)"/>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C2" type="Persistent" antecedentExpr="C2_AntecedentExpr" consequentExpr="C2_ConsequentExpr" activeExpr="C2_ActiveExpr">
+    <scopeBegin id="C2_ScopeBegin" side="Receive" messageFlowRef="FishFromLocalCourierMF"/>
+    <scopeEnd id="C2_ScopeEnd" side="Receive" messageFlowRef="FishFromLongHaulCourierMF"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_AntecedentExpr" body="oversea" itemRefs="ShipmentOrderDef"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_ActiveExpr" body="temp &lt; 20 °C" itemRefs="FishDef"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_ConsequentExpr" language="" body="hum &lt; 50%" itemRefs="FishDef"/>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C3" type="Persistent" antecedentExpr="C3_AntecedentExpr" consequentExpr="C3_ConsequentExpr">
+    <scopeBegin id="C3_ScopeBegin" messageFlowRef="ConfirmationMF"/>
+    <scopeEnd id="C3_ScopeEnd" side="Receive" messageFlowRef="FishToCustomerMF"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C3_AntecedentExpr" body="fish ready" itemRefs="FishDef"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C3_ConsequentExpr" body="temp &lt; 10 °C" itemRefs="FishDef"/>
+</bpmnchor:Definitions>
