@@ -13,8 +13,8 @@ This repostory contains:
 ## Requirements
 This is the software configuration tested. Other software versions or operating systems are not supported.
 * Eclipse 4.5.2
-** BPMN2 Metamodel
-** BPMN2 Modeler - Diagram Editor
+  * BPMN2 Metamodel
+  * BPMN2 Modeler - Diagram Editor
 * Java 8
 * Windows 10
 Note that the tool can also be used as a standalone console application. In this case, Eclipse is not required. However, it only allows to derive requirements from an existing model.
@@ -22,14 +22,14 @@ Note that the tool can also be used as a standalone console application. In this
 
 ## Installation and set-up instructions
 As an Eclipse plugin:
-1. Download the last bpmnchor-tc-plugin zip file from here: <add url>
+1. Download the last bpmnchor-tc-plugin zip file from here: https://github.com/plebanip/isolab-commitment-bpmn-checker/releases
 2. Copy the zip file inside Eclipse root directory and expand it there.
 3. Start Eclipse
 4. check if the plugin is installed: verify (do not click) if in the *File* -> *New* exists an element *Bpmnchor model*
 5. Open bpmnchor-tc perspective: *Window* -> *Perspective* ->  *Open Perspective * -> *Other* -> *Bpmnchor
   
 As a standalone console application:
-1. Download the last bpmnchor-tc-standalone jar file from here: <add url>
+1. Download the last bpmnchor-tc-standalone jar file from here: https://github.com/plebanip/isolab-commitment-bpmn-checker/releases
 
 ## Usage (Eclipse plugin editor)
 1. Open Eclipse with bpmnchor-tc plugin installed.
@@ -57,10 +57,7 @@ Your Eclipse interface should now be similar to the following screenshot:
 
   `java -jar bpmnchor-tc-standalone.jar URI trustless`
   
-  URI is the uri of the bpmnchor-tc model to analyze (e.g., https://github.com/plebanip/isolab-commitment-bpmn-checker/blob/master/documentation/examples/runningExample-extended.bpmnchor)
-  
-  
-  file:/C:/temp/runningExample-extended.bpmnchor )
+  URI is the uri of the bpmnchor-tc model to analyze (e.g., https://raw.githubusercontent.com/plebanip/isolab-commitment-bpmn-checker/blob/master/documentation/examples/runningExample-extended.bpmnchor)
 
-  4. Requirements are outputted as text (stdout).
+4. Requirements are outputted as text (stdout).
 
