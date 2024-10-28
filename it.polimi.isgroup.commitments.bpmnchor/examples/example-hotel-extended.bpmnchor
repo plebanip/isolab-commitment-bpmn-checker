@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmnchor:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" xmlns:bpmnchor="http://www.example.org/bpmnchor" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.2.3.CR2-v20160209-2002" targetNamespace="http://org.eclipse.bpmn2/default/choreography">
+  <rootElements xsi:type="bpmn2:Message" id="Message_3" name="Check room"/>
+  <rootElements xsi:type="bpmn2:Message" id="Message_5" name="Give availability"/>
+  <rootElements xsi:type="bpmn2:Message" id="Message_7" name="Room quotation"/>
+  <rootElements xsi:type="bpmn2:Message" id="Message_9" name="Book room"/>
+  <rootElements xsi:type="bpmn2:Message" id="Message_2" itemRef="PaymentDef" name="Payment"/>
+  <rootElements xsi:type="bpmn2:Message" id="Message_6" name="Cancel order"/>
+  <rootElements xsi:type="bpmn2:Message" id="Message_10" itemRef="BookingDef" name="Booking"/>
+  <rootElements xsi:type="bpmn2:Message" id="Message_12" itemRef="ReceiptDef" name="Receipt"/>
+  <rootElements xsi:type="bpmn2:Choreography" id="Choreography_1" name="Default Choreography">
+    <participants id="Client" name="Client"/>
+    <participants id="Hotel" name="Hotel"/>
+    <participants id="Participant_3" name="New Participant"/>
+    <participants id="Participant_4" name="New Participant"/>
+    <participants id="Participant_5" name="New Participant"/>
+    <participants id="Participant_6" name="New Participant"/>
+    <participants id="Participant_7" name="New Participant"/>
+    <participants id="Participant_8" name="New Participant"/>
+    <participants id="Participant_9" name="New Participant"/>
+    <participants id="Participant_10" name="New Participant"/>
+    <participants id="Participant_11" name="New Participant"/>
+    <participants id="Participant_12" name="New Participant"/>
+    <participants id="Participant_13" name="New Participant"/>
+    <participants id="Participant_14" name="New Participant"/>
+    <participants id="Participant_15" name="Participant 15"/>
+    <participants id="PaymentGateway" name="PaymentGateway"/>
+    <messageFlows id="MessageFlow_1" messageRef="Message_3" name="Message Flow Check room" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_2" messageRef="Message_5" name="Message Flow Give availability" sourceRef="Hotel" targetRef="Client"/>
+    <messageFlows id="MessageFlow_3" messageRef="Message_7" name="Message Flow Room quotation" sourceRef="Hotel" targetRef="Client"/>
+    <messageFlows id="MessageFlow_4" messageRef="Message_9" name="Message Flow Book room" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_5" messageRef="Message_2" name="Message Flow Payment" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_6" messageRef="Message_6" name="Message Flow Cancel order" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_7" messageRef="Message_10" name="Message Flow Booking" sourceRef="Hotel" targetRef="Client"/>
+    <messageFlows id="MessageFlow_8" messageRef="Message_12" name="Message Flow Receipt" sourceRef="Hotel" targetRef="Client"/>
+    <artifacts xsi:type="bpmn2:Association" id="Association_1" sourceRef="ChoreographyTask_4" targetRef="TextAnnotation_2"/>
+    <artifacts xsi:type="bpmn2:Association" id="Association_2" sourceRef="TextAnnotation_2" targetRef="ChoreographyTask_5"/>
+    <artifacts xsi:type="bpmn2:Association" id="Association_3" sourceRef="TextAnnotation_1" targetRef="ChoreographyTask_4"/>
+    <artifacts xsi:type="bpmn2:Association" id="Association_4" sourceRef="TextAnnotation_1" targetRef="ChoreographyTask_6"/>
+    <artifacts xsi:type="bpmn2:TextAnnotation" id="TextAnnotation_2" text="If amount greater than 500 EUR, confirmation sent within 1 hour after payment"/>
+    <artifacts xsi:type="bpmn2:TextAnnotation" id="TextAnnotation_1" text="Receipt 48 hours after payment"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_1" name="Availability check" incoming="SequenceFlow_2" outgoing="SequenceFlow_3" participantRefs="Client Hotel" initiatingParticipantRef="Client" messageFlowRef="MessageFlow_1 MessageFlow_2"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_2" name="Confirmation" incoming="SequenceFlow_4" outgoing="SequenceFlow_5" participantRefs="Hotel Client" initiatingParticipantRef="Client" messageFlowRef="MessageFlow_3 MessageFlow_4"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_3" name="Order rejection" incoming="SequenceFlow_7" outgoing="SequenceFlow_11" participantRefs="Client Hotel" initiatingParticipantRef="Client" messageFlowRef="MessageFlow_6"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_4" name="Payment" incoming="SequenceFlow_6" outgoing="SequenceFlow_8" participantRefs="Client Hotel" initiatingParticipantRef="Client" messageFlowRef="MessageFlow_5"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_5" name="Booking confirmation" incoming="SequenceFlow_9" outgoing="SequenceFlow_10" participantRefs="Hotel Client" initiatingParticipantRef="Hotel" messageFlowRef="MessageFlow_7"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_6" name="Receipt delivery" incoming="SequenceFlow_12" outgoing="SequenceFlow_13" participantRefs="Hotel Client" initiatingParticipantRef="Hotel" messageFlowRef="MessageFlow_8"/>
+    <flowElements xsi:type="bpmn2:EndEvent" id="EndEvent_1" name="End Event 1" incoming="SequenceFlow_11"/>
+    <flowElements xsi:type="bpmn2:EndEvent" id="EndEvent_2" name="End Event 2" incoming="SequenceFlow_14"/>
+    <flowElements xsi:type="bpmn2:EventBasedGateway" id="EventBasedGateway_1" name="Event Based Gateway 1" incoming="SequenceFlow_5" outgoing="SequenceFlow_6 SequenceFlow_7" gatewayDirection="Diverging"/>
+    <flowElements xsi:type="bpmn2:ExclusiveGateway" id="ExclusiveGateway_1" name="Exclusive Gateway 1" incoming="SequenceFlow_1 SequenceFlow_16" outgoing="SequenceFlow_2" gatewayDirection="Converging"/>
+    <flowElements xsi:type="bpmn2:ExclusiveGateway" id="ExclusiveGateway_2" name="Exclusive Gateway 2" incoming="SequenceFlow_3" outgoing="SequenceFlow_4 SequenceFlow_16" gatewayDirection="Diverging"/>
+    <flowElements xsi:type="bpmn2:ParallelGateway" id="ParallelGateway_1" name="Parallel Gateway 1" incoming="SequenceFlow_8" outgoing="SequenceFlow_9 SequenceFlow_12" gatewayDirection="Diverging"/>
+    <flowElements xsi:type="bpmn2:ParallelGateway" id="ParallelGateway_2" name="Parallel Gateway 2" incoming="SequenceFlow_10 SequenceFlow_13" outgoing="SequenceFlow_14" gatewayDirection="Converging"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_2" sourceRef="ExclusiveGateway_1" targetRef="ChoreographyTask_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_3" sourceRef="ChoreographyTask_1" targetRef="ExclusiveGateway_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_4" sourceRef="ExclusiveGateway_2" targetRef="ChoreographyTask_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_5" sourceRef="ChoreographyTask_2" targetRef="EventBasedGateway_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_6" sourceRef="EventBasedGateway_1" targetRef="ChoreographyTask_4"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_7" sourceRef="EventBasedGateway_1" targetRef="ChoreographyTask_3"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_8" sourceRef="ChoreographyTask_4" targetRef="ParallelGateway_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_9" sourceRef="ParallelGateway_1" targetRef="ChoreographyTask_5"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_10" sourceRef="ChoreographyTask_5" targetRef="ParallelGateway_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_11" sourceRef="ChoreographyTask_3" targetRef="EndEvent_1"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_12" sourceRef="ParallelGateway_1" targetRef="ChoreographyTask_6"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_13" sourceRef="ChoreographyTask_6" targetRef="ParallelGateway_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_14" sourceRef="ParallelGateway_2" targetRef="EndEvent_2"/>
+    <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_16" sourceRef="ExclusiveGateway_2" targetRef="ExclusiveGateway_1"/>
+    <flowElements xsi:type="bpmn2:StartEvent" id="StartEvent_1" name="Start Event 1" outgoing="SequenceFlow_1"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C1" antecedentExpr="C1_AntecedentExpr" consequentExpr="C1_ConsequentExpr">
+    <scopeBegin id="C1_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_5"/>
+    <scopeEnd id="C1_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_7"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C2" antecedentExpr="C2_AntecedentExpr" consequentExpr="C2_ConsequentExpr">
+    <scopeBegin id="C2_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_5"/>
+    <scopeEnd id="C2_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_8"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1_AntecedentExpr" body="(payment > 500 Eur)" itemRefs="PaymentDef"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1_ConsequentExpr" body="(confirmation arrives within 1 hour)"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_AntecedentExpr" body="true"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_ConsequentExpr" body="(receipt arrives within 48 hours)"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="PaymentDef"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="BookingDef"/>
+  <rootElements xsi:type="bpmn2:ItemDefinition" id="ReceiptDef"/>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="PaymentGWRes" ownerRef="PaymentGateway" itemRef="PaymentDef"/>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="ReceiptRes" ownerRef="Hotel" itemRef="ReceiptDef"/>
+  <rootElements xsi:type="bpmnchor:MonitoringResource" id="BookingRes" ownerRef="Hotel" itemRef="BookingDef"/>
+</bpmnchor:Definitions>
