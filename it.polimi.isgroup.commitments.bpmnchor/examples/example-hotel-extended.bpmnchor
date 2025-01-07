@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmnchor:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" xmlns:bpmnchor="http://www.example.org/bpmnchor" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.2.3.CR2-v20160209-2002" targetNamespace="http://org.eclipse.bpmn2/default/choreography">
-  <rootElements xsi:type="bpmn2:Message" id="Message_3" name="Check room"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_5" name="Give availability"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_7" name="Room quotation"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_9" name="Book room"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_2" itemRef="PaymentDef" name="Payment"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_6" name="Cancel order"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_10" itemRef="BookingDef" name="Booking"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_12" itemRef="ReceiptDef" name="Receipt"/>
+  <rootElements xsi:type="bpmn2:Message" id="CheckRoom" name="Check room"/>
+  <rootElements xsi:type="bpmn2:Message" id="GiveAvailability" name="Give availability"/>
+  <rootElements xsi:type="bpmn2:Message" id="RoomQuotation" name="Room quotation"/>
+  <rootElements xsi:type="bpmn2:Message" id="BookRoom" name="Book room"/>
+  <rootElements xsi:type="bpmn2:Message" id="Payment" itemRef="PaymentDef" name="Payment"/>
+  <rootElements xsi:type="bpmn2:Message" id="CancelOrder" name="Cancel order"/>
+  <rootElements xsi:type="bpmn2:Message" id="Booking" itemRef="BookingDef" name="Booking"/>
+  <rootElements xsi:type="bpmn2:Message" id="Receipt" itemRef="ReceiptDef" name="Receipt"/>
   <rootElements xsi:type="bpmn2:Choreography" id="Choreography_1" name="Default Choreography">
     <participants id="Client" name="Client"/>
     <participants id="Hotel" name="Hotel"/>
@@ -25,14 +25,14 @@
     <participants id="Participant_14" name="New Participant"/>
     <participants id="Participant_15" name="Participant 15"/>
     <participants id="PaymentGateway" name="PaymentGateway"/>
-    <messageFlows id="MessageFlow_1" messageRef="Message_3" name="Message Flow Check room" sourceRef="Client" targetRef="Hotel"/>
-    <messageFlows id="MessageFlow_2" messageRef="Message_5" name="Message Flow Give availability" sourceRef="Hotel" targetRef="Client"/>
-    <messageFlows id="MessageFlow_3" messageRef="Message_7" name="Message Flow Room quotation" sourceRef="Hotel" targetRef="Client"/>
-    <messageFlows id="MessageFlow_4" messageRef="Message_9" name="Message Flow Book room" sourceRef="Client" targetRef="Hotel"/>
-    <messageFlows id="MessageFlow_5" messageRef="Message_2" name="Message Flow Payment" sourceRef="Client" targetRef="Hotel"/>
-    <messageFlows id="MessageFlow_6" messageRef="Message_6" name="Message Flow Cancel order" sourceRef="Client" targetRef="Hotel"/>
-    <messageFlows id="MessageFlow_7" messageRef="Message_10" name="Message Flow Booking" sourceRef="Hotel" targetRef="Client"/>
-    <messageFlows id="MessageFlow_8" messageRef="Message_12" name="Message Flow Receipt" sourceRef="Hotel" targetRef="Client"/>
+    <messageFlows id="MessageFlow_1" messageRef="CheckRoom" name="Message Flow Check room" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_2" messageRef="GiveAvailability" name="Message Flow Give availability" sourceRef="Hotel" targetRef="Client"/>
+    <messageFlows id="MessageFlow_3" messageRef="RoomQuotation" name="Message Flow Room quotation" sourceRef="Hotel" targetRef="Client"/>
+    <messageFlows id="MessageFlow_4" messageRef="BookRoom" name="Message Flow Book room" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_5" messageRef="Payment" name="Message Flow Payment" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_6" messageRef="CancelOrder" name="Message Flow Cancel order" sourceRef="Client" targetRef="Hotel"/>
+    <messageFlows id="MessageFlow_7" messageRef="Booking" name="Message Flow Booking" sourceRef="Hotel" targetRef="Client"/>
+    <messageFlows id="MessageFlow_8" messageRef="Receipt" name="Message Flow Receipt" sourceRef="Hotel" targetRef="Client"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_1" sourceRef="ChoreographyTask_4" targetRef="TextAnnotation_2"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_2" sourceRef="TextAnnotation_2" targetRef="ChoreographyTask_5"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_3" sourceRef="TextAnnotation_1" targetRef="ChoreographyTask_4"/>
@@ -87,4 +87,10 @@
   <rootElements xsi:type="bpmnchor:MonitoringResource" id="PaymentGWRes" ownerRef="PaymentGateway" itemRef="PaymentDef"/>
   <rootElements xsi:type="bpmnchor:MonitoringResource" id="ReceiptRes" ownerRef="Hotel" itemRef="ReceiptDef"/>
   <rootElements xsi:type="bpmnchor:MonitoringResource" id="BookingRes" ownerRef="Hotel" itemRef="BookingDef"/>
+  <rootElements xsi:type="bpmnchor:Commitment" id="C3" antecedentExpr="C3_AntecedentExpr" consequentExpr="C3_ConsequentExpr">
+    <scopeBegin id="C3_ScopeBegin" messageFlowRef="MessageFlow_4"/>
+    <scopeEnd id="C3_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_5"/>
+  </rootElements>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C3_AntecedentExpr" body="true"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C3_ConsequentExpr" body="(payment arrives within 24 hours)"/>
 </bpmnchor:Definitions>

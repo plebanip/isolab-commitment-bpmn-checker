@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmnchor:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" xmlns:bpmnchor="http://www.example.org/bpmnchor" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.2.3.CR2-v20160209-2002" targetNamespace="http://org.eclipse.bpmn2/default/choreography">
-  <rootElements xsi:type="bpmn2:Message" id="Message_2" itemRef="IncidentDef" name="Incident"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_3" name="Relay request"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_5" name="Incident category"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_7" name="2nd level support notification"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_9" name="2nd level support escalation"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_4" name="IT manager notification"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_8" name="IT manager escalation"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_6" name="Incident resolved (IT manager)"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_11" name="Incident resolved (2nd level support)"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_10" name="Resoution steps"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_13" name="Incident closed notification"/>
+  <rootElements xsi:type="bpmn2:Message" id="Incident" itemRef="IncidentDef" name="Incident"/>
+  <rootElements xsi:type="bpmn2:Message" id="RelayRequest" name="Relay request"/>
+  <rootElements xsi:type="bpmn2:Message" id="IncidentCategory" name="Incident category"/>
+  <rootElements xsi:type="bpmn2:Message" id="2ndLevelSupportNotification" name="2nd level support notification"/>
+  <rootElements xsi:type="bpmn2:Message" id="2ndLevelSupportEscalation" name="2nd level support escalation"/>
+  <rootElements xsi:type="bpmn2:Message" id="ITManagerNotification" name="IT manager notification"/>
+  <rootElements xsi:type="bpmn2:Message" id="ITManagerEscalation" name="IT manager escalation"/>
+  <rootElements xsi:type="bpmn2:Message" id="IncidentResolvedITManager" name="Incident resolved (IT manager)"/>
+  <rootElements xsi:type="bpmn2:Message" id="IncidentResolved2ndLevelSupport" name="Incident resolved (2nd level support)"/>
+  <rootElements xsi:type="bpmn2:Message" id="ResolutionSteps" name="Resolution steps"/>
+  <rootElements xsi:type="bpmn2:Message" id="IncidentClosedNotification" name="Incident closed notification"/>
   <rootElements xsi:type="bpmn2:Choreography" id="Choreography_1" name="Default Choreography">
     <participants id="Customer" name="Customer"/>
     <participants id="ServiceDesk" name="Service desk"/>
@@ -38,17 +38,17 @@
     <participants id="ITManager" name="IT manager"/>
     <participants id="Participant_25" name="New Participant"/>
     <participants id="Participant_26" name="New Participant"/>
-    <messageFlows id="MessageFlow_1" messageRef="Message_2" name="Message Flow 1" sourceRef="Customer" targetRef="ServiceDesk"/>
-    <messageFlows id="MessageFlow_2" messageRef="Message_3" name="Message Flow 2" sourceRef="ServiceDesk" targetRef="RequestFulfillment"/>
-    <messageFlows id="MessageFlow_3" messageRef="Message_5" name="Message Flow 3" sourceRef="ServiceDesk" targetRef="Customer"/>
-    <messageFlows id="MessageFlow_4" messageRef="Message_7" name="Message Flow 4" sourceRef="ServiceDesk" targetRef="Customer"/>
-    <messageFlows id="MessageFlow_5" messageRef="Message_9" name="Message Flow 5" sourceRef="ServiceDesk" targetRef="2ndLevelSupport"/>
-    <messageFlows id="MessageFlow_6" messageRef="Message_4" name="Message Flow 6" sourceRef="2ndLevelSupport" targetRef="Customer"/>
-    <messageFlows id="MessageFlow_7" messageRef="Message_8" name="Message Flow 7" sourceRef="2ndLevelSupport" targetRef="ITManager"/>
-    <messageFlows id="MessageFlow_8" messageRef="Message_6" name="Message Flow 8" sourceRef="ITManager" targetRef="2ndLevelSupport"/>
-    <messageFlows id="MessageFlow_9" messageRef="Message_11" name="Message Flow 9" sourceRef="2ndLevelSupport" targetRef="ServiceDesk"/>
-    <messageFlows id="MessageFlow_10" messageRef="Message_10" name="Message Flow 10" sourceRef="2ndLevelSupport" targetRef="Customer"/>
-    <messageFlows id="MessageFlow_11" messageRef="Message_13" name="Message Flow 11" sourceRef="ServiceDesk" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_1" messageRef="Incident" name="Message Flow Incident" sourceRef="Customer" targetRef="ServiceDesk"/>
+    <messageFlows id="MessageFlow_2" messageRef="RelayRequest" name="Message Flow Relay request" sourceRef="ServiceDesk" targetRef="RequestFulfillment"/>
+    <messageFlows id="MessageFlow_3" messageRef="IncidentCategory" name="Message Flow Incident category" sourceRef="ServiceDesk" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_4" messageRef="2ndLevelSupportNotification" name="Message Flow 2nd level support notification" sourceRef="ServiceDesk" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_5" messageRef="2ndLevelSupportEscalation" name="Message Flow 2nd level support escalation" sourceRef="ServiceDesk" targetRef="2ndLevelSupport"/>
+    <messageFlows id="MessageFlow_6" messageRef="ITManagerNotification" name="Message Flow IT manager notification" sourceRef="2ndLevelSupport" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_7" messageRef="ITManagerEscalation" name="Message Flow IT manager escalation" sourceRef="2ndLevelSupport" targetRef="ITManager"/>
+    <messageFlows id="MessageFlow_8" messageRef="IncidentResolvedITManager" name="Message Flow Incident resolved (IT manager)" sourceRef="ITManager" targetRef="2ndLevelSupport"/>
+    <messageFlows id="MessageFlow_9" messageRef="IncidentResolved2ndLevelSupport" name="Message Flow Incident resolved (2nd level support)" sourceRef="2ndLevelSupport" targetRef="ServiceDesk"/>
+    <messageFlows id="MessageFlow_10" messageRef="ResolutionSteps" name="Message Flow Resolution steps" sourceRef="2ndLevelSupport" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_11" messageRef="IncidentClosedNotification" name="Message Flow Incident closed notification" sourceRef="ServiceDesk" targetRef="Customer"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_1" sourceRef="TextAnnotation_2" targetRef="ChoreographyTask_1"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_2" sourceRef="TextAnnotation_2" targetRef="ChoreographyTask_10"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_3" sourceRef="ChoreographyTask_5" targetRef="TextAnnotation_3"/>
@@ -102,7 +102,7 @@
     <scopeBegin id="C1_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_1"/>
     <scopeEnd id="C1_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_11"/>
   </rootElements>
-  <rootElements xsi:type="bpmnchor:Commitment" id="C2" antecedentExpr="C2_AntecedentExpr" consequentExpr="C2_ConsequentExpr">
+  <rootElements xsi:type="bpmnchor:Commitment" id="C2" type="Persistent" antecedentExpr="C2_AntecedentExpr" consequentExpr="C2_ConsequentExpr">
     <scopeBegin id="C2_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_5"/>
     <scopeEnd id="C2_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_9"/>
   </rootElements>

@@ -1,0 +1,23 @@
+[INFORMATION] Inferring trustful monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [INFORMATION] checking antecedent expression (payment > 500 Eur)
+  [INFORMATION] Antecedent expression is evaluated from when message Payment is received until message Booking is received
+  [INFORMATION] Scenario 1: participant Hotel evaluates antecedent expression
+   [WARNING] Participant PaymentGateway must grant access to Hotel on PaymentGWRes
+ [INFORMATION] checking consequent expression (confirmation arrives within 1 hour)
+  [INFORMATION] Consequent expression is evaluated when message Booking is received
+  [INFORMATION] Scenario 1: participant Client evaluates consequent expression
+[INFORMATION] checking commitment C2
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message Payment is received until message Receipt is received
+  [INFORMATION] Scenario 1: participant Hotel evaluates antecedent expression
+ [INFORMATION] checking consequent expression (receipt arrives within 48 hours)
+  [INFORMATION] Consequent expression is evaluated when message Receipt is received
+  [INFORMATION] Scenario 1: participant Client evaluates consequent expression
+[INFORMATION] checking commitment C3
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message BookRoom is sent until message Payment is received
+  [INFORMATION] Scenario 1: participant Client evaluates antecedent expression
+ [INFORMATION] checking consequent expression (payment arrives within 24 hours)
+  [INFORMATION] Consequent expression is evaluated when message Payment is received
+  [INFORMATION] Scenario 1: participant Hotel evaluates consequent expression

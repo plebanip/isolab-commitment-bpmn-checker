@@ -1,0 +1,55 @@
+[INFORMATION] Inferring trustless monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [WARNING] No smart device exists for OrderMsg
+  [INFORMATION] Scenario 1: Participants SeaCO and Customer must put in place mechanisms to determine when OrderMsg is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [WARNING] No smart device exists for ConfirmationMsg
+  [INFORMATION] Scenario 1: Participants SeaCO and Customer must put in place mechanisms to determine when ConfirmationMsg is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message OrderMsg is received until message ConfirmationMsg is received
+  [INFORMATION] Scenario 1: participants SeaCO and Customer evaluate antecedent expression
+ [INFORMATION] checking consequent expression (confirmation arrives within 5 days)
+  [INFORMATION] Consequent expression is evaluated when message ConfirmationMsg is received
+  [INFORMATION] Scenario 1: participants SeaCO and Customer evaluate consequent expression
+[INFORMATION] checking commitment C2
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: smart device FishRes must notify LongHaulCourier and LocalCourier when FishFromLocalCourierMsg is received
+  [INFORMATION] Scenario 2: Participant SeaCO must grant access to LongHaulCourier and LocalCourier on FishRes
+  [INFORMATION] Scenario 3: Participants LongHaulCourier and LocalCourier must put in place mechanisms to determine when FishFromLocalCourierMsg is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: smart device FishRes must notify LongHaulCourier and LocalCourier when FishFromLongHaulCourierMsg is received
+  [INFORMATION] Scenario 2: Participant SeaCO must grant access to LongHaulCourier and LocalCourier on FishRes
+  [INFORMATION] Scenario 3: Participants LongHaulCourier and LocalCourier must put in place mechanisms to determine when FishFromLongHaulCourierMsg is received
+ [INFORMATION] checking antecedent expression oversea
+  [INFORMATION] Antecedent expression is evaluated from when message FishFromLocalCourierMsg is received until message FishFromLongHaulCourierMsg is received
+  [INFORMATION] Scenario 1: participants LongHaulCourier and LocalCourier evaluate antecedent expression
+   [ERROR] bpmnchor.infer.exceptions.MonitoringResourceMissingException: no monitoring resource defined for ShipmentOrderDef
+ [INFORMATION] checking active expression temp < 20 °C
+  [INFORMATION] Antecedent expression is evaluated from when message FishFromLocalCourierMsg is received until message FishFromLongHaulCourierMsg is received
+  [INFORMATION] Scenario 1: participants LongHaulCourier and LocalCourier evaluate active expression
+   [WARNING] Participant SeaCO must grant access to LongHaulCourier on FishRes
+   [WARNING] Participant SeaCO must grant access to LocalCourier on FishRes
+ [INFORMATION] checking consequent expression hum < 50%
+  [INFORMATION] Antecedent expression is evaluated from when message FishFromLocalCourierMsg is received until message FishFromLongHaulCourierMsg is received
+  [INFORMATION] Scenario 1: participants LongHaulCourier and LocalCourier evaluate consequent expression
+   [WARNING] Participant SeaCO must grant access to LongHaulCourier on FishRes
+   [WARNING] Participant SeaCO must grant access to LocalCourier on FishRes
+[INFORMATION] checking commitment C3
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [WARNING] No smart device exists for ConfirmationMsg
+  [INFORMATION] Scenario 1: Participants SeaCO and Customer must put in place mechanisms to determine when ConfirmationMsg is sent
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: smart device FishRes must notify SeaCO and Customer when FishToCustomerMsg is received
+  [INFORMATION] Scenario 2: Participant SeaCO must grant access to Customer on FishRes
+  [INFORMATION] Scenario 3: Participants SeaCO and Customer must put in place mechanisms to determine when FishToCustomerMsg is received
+ [INFORMATION] checking antecedent expression fish ready
+  [INFORMATION] Antecedent expression is evaluated from when message ConfirmationMsg is sent until message FishToCustomerMsg is received
+  [INFORMATION] Scenario 1: participants SeaCO and Customer evaluate antecedent expression
+   [INFORMATION] Participant SeaCO can access FishRes
+   [WARNING] Participant SeaCO must grant access to Customer on FishRes
+ [INFORMATION] checking consequent expression temp < 10 °C
+  [INFORMATION] Antecedent expression is evaluated from when message ConfirmationMsg is sent until message FishToCustomerMsg is received
+  [INFORMATION] Scenario 1: participants SeaCO and Customer evaluate consequent expression
+   [INFORMATION] Participant SeaCO can access FishRes
+   [WARNING] Participant SeaCO must grant access to Customer on FishRes

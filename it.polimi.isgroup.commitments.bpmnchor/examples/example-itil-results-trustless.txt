@@ -1,0 +1,39 @@
+[INFORMATION] Inferring trustless monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participant ServiceDesk must grant access to Customer on IncidentRes
+  [INFORMATION] Scenario 2: Participants ServiceDesk and Customer must put in place mechanisms to determine when Incident is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participants ServiceDesk and Customer must put in place mechanisms to determine when IncidentClosedNotification is received
+ [INFORMATION] checking antecedent expression (1st level support)
+  [INFORMATION] Antecedent expression is evaluated from when message Incident is received until message IncidentClosedNotification is received
+  [INFORMATION] Scenario 1: participants ServiceDesk and Customer evaluate antecedent expression
+   [INFORMATION] Participant ServiceDesk can access IncidentRes
+   [WARNING] Participant ServiceDesk must grant access to Customer on IncidentRes
+ [INFORMATION] checking consequent expression (incident closed in 48 hours)
+  [INFORMATION] Consequent expression is evaluated when message IncidentClosedNotification is received
+  [INFORMATION] Scenario 1: participants ServiceDesk and Customer evaluate consequent expression
+[INFORMATION] checking commitment C2
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participants 2ndLevelSupport and ServiceDesk must put in place mechanisms to determine when 2ndLevelSupportEscalation is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participants 2ndLevelSupport and ServiceDesk must put in place mechanisms to determine when IncidentResolved2ndLevelSupport is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message 2ndLevelSupportEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participants 2ndLevelSupport and ServiceDesk evaluate antecedent expression
+ [INFORMATION] checking consequent expression (incident resolved in 7 days)
+  [INFORMATION] Antecedent expression is evaluated from when message 2ndLevelSupportEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participants 2ndLevelSupport and ServiceDesk evaluate consequent expression
+[INFORMATION] checking commitment C3
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participants ITManager and ServiceDesk must put in place mechanisms to determine when ITManagerEscalation is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participants ITManager and ServiceDesk must put in place mechanisms to determine when IncidentResolved2ndLevelSupport is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message ITManagerEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participants ITManager and ServiceDesk evaluate antecedent expression
+ [INFORMATION] checking consequent expression (IT manager)
+  [INFORMATION] Antecedent expression is evaluated from when message ITManagerEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participants ITManager and ServiceDesk evaluate consequent expression
+   [WARNING] Participant ServiceDesk must grant access to ITManager on IncidentRes
+   [INFORMATION] Participant ServiceDesk can access IncidentRes

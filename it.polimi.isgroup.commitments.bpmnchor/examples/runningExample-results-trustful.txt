@@ -1,0 +1,42 @@
+[INFORMATION] Inferring trustful monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message OrderMsg is received until message ConfirmationMsg is received
+  [INFORMATION] Scenario 1: participant SeaCO evaluates antecedent expression
+ [INFORMATION] checking consequent expression (confirmation arrives within 5 days)
+  [INFORMATION] Consequent expression is evaluated when message ConfirmationMsg is received
+  [INFORMATION] Scenario 1: participant Customer evaluates consequent expression
+[INFORMATION] checking commitment C2
+ [INFORMATION] checking antecedent expression oversea
+  [INFORMATION] Antecedent expression is evaluated from when message FishFromLocalCourierMsg is received until message FishFromLongHaulCourierMsg is received
+  [INFORMATION] Scenario 1: participant LongHaulCourier evaluates antecedent expression
+   [ERROR] bpmnchor.infer.exceptions.MonitoringResourceMissingException: no monitoring resource defined for ShipmentOrderDef
+ [INFORMATION] checking active expression temp < 20 °C
+  [INFORMATION] Antecedent expression is evaluated from when message FishFromLocalCourierMsg is received until message FishFromLongHaulCourierMsg is received
+  [INFORMATION] 1 smart devices can evaluate active expression
+  [INFORMATION] Scenario 1: participant LongHaulCourier evaluates active expression
+   [WARNING] Participant SeaCO must grant access to LongHaulCourier on FishRes
+  [INFORMATION] Scenario 2: smart device FishRes evaluates active expression
+   [WARNING] Smart device FishRes must notify participant LongHaulCourier when the expression evaluates to true
+ [INFORMATION] checking consequent expression hum < 50%
+  [INFORMATION] Antecedent expression is evaluated from when message FishFromLocalCourierMsg is received until message FishFromLongHaulCourierMsg is received
+  [INFORMATION] 1 smart devices can evaluate consequent expression
+  [INFORMATION] Scenario 1: participant LocalCourier evaluates consequent expression
+   [WARNING] Participant SeaCO must grant access to LocalCourier on FishRes
+  [INFORMATION] Scenario 2: smart device FishRes evaluates consequent expression
+   [WARNING] Smart device FishRes must notify participant LocalCourier when the expression evaluates to true
+[INFORMATION] checking commitment C3
+ [INFORMATION] checking antecedent expression fish ready
+  [INFORMATION] Antecedent expression is evaluated from when message ConfirmationMsg is sent until message FishToCustomerMsg is received
+  [INFORMATION] 1 smart devices can evaluate antecedent expression
+  [INFORMATION] Scenario 1: participant SeaCO evaluates antecedent expression
+   [INFORMATION] Participant SeaCO can access FishRes
+  [INFORMATION] Scenario 2: smart device FishRes evaluates antecedent expression
+   [INFORMATION] Participant SeaCO is the owner of FishRes
+ [INFORMATION] checking consequent expression temp < 10 °C
+  [INFORMATION] Antecedent expression is evaluated from when message ConfirmationMsg is sent until message FishToCustomerMsg is received
+  [INFORMATION] 1 smart devices can evaluate consequent expression
+  [INFORMATION] Scenario 1: participant Customer evaluates consequent expression
+   [WARNING] Participant SeaCO must grant access to Customer on FishRes
+  [INFORMATION] Scenario 2: smart device FishRes evaluates consequent expression
+   [WARNING] Smart device FishRes must notify participant Customer when the expression evaluates to true

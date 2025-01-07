@@ -126,12 +126,12 @@
     <bpmn2:messageFlow id="MessageFlow_7" messageRef="Message_10" name="Message Flow 7" sourceRef="Participant_2" targetRef="Participant_1"/>
     <bpmn2:messageFlow id="MessageFlow_8" messageRef="Message_12" name="Message Flow 8" sourceRef="Participant_2" targetRef="Participant_1"/>
     <bpmn2:textAnnotation id="TextAnnotation_2">
-      <bpmn2:text>If amount greater than 500 EUR, confirmation sent within 1 hour after payment</bpmn2:text>
+      <bpmn2:text>If amount greater than 500 EUR, confirmation sent within 1 hour after payment (goal)</bpmn2:text>
     </bpmn2:textAnnotation>
     <bpmn2:association id="Association_1" sourceRef="ChoreographyTask_4" targetRef="TextAnnotation_2"/>
     <bpmn2:association id="Association_2" sourceRef="TextAnnotation_2" targetRef="ChoreographyTask_5"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
-      <bpmn2:text>Receipt 48 hours after payment</bpmn2:text>
+      <bpmn2:text>Receipt 48 hours after payment (goal)</bpmn2:text>
     </bpmn2:textAnnotation>
     <bpmn2:association id="Association_3" sourceRef="TextAnnotation_1" targetRef="ChoreographyTask_4"/>
     <bpmn2:association id="Association_4" sourceRef="TextAnnotation_1" targetRef="ChoreographyTask_6"/>
@@ -139,6 +139,11 @@
       <bpmn2:text>ChorChain: A Model-Driven Framework for
 Choreography-Based Systems Using Blockchain</bpmn2:text>
     </bpmn2:textAnnotation>
+    <bpmn2:textAnnotation id="TextAnnotation_4">
+      <bpmn2:text>Payment must be received within 24 hours. (goal)</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:association id="Association_5" sourceRef="ChoreographyTask_2" targetRef="TextAnnotation_4"/>
+    <bpmn2:association id="Association_6" sourceRef="TextAnnotation_4" targetRef="ChoreographyTask_4"/>
     <bpmn2:choreographyTask id="ChoreographyTask_1" name="Availability check" initiatingParticipantRef="Participant_1">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
@@ -638,9 +643,9 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_TextAnnotation_2" bpmnElement="TextAnnotation_2">
-        <dc:Bounds height="61.0" width="100.0" x="970.0" y="20.0"/>
+        <dc:Bounds height="68.0" width="146.0" x="924.0" y="2.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_83">
-          <dc:Bounds height="55.0" width="88.0" x="976.0" y="20.0"/>
+          <dc:Bounds height="62.0" width="134.0" x="930.0" y="2.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Participant_53" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_1" isHorizontal="true" isMessageVisible="true">
@@ -823,7 +828,7 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
           <dc:Bounds height="15.0" width="32.0" x="804.0" y="312.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Participant_82" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_2" isHorizontal="true" participantBandKind="bottom_non_initiating">
+      <bpmndi:BPMNShape id="BPMNShape_Participant_82" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_2" isHorizontal="true" isMessageVisible="true" participantBandKind="bottom_non_initiating">
         <dc:Bounds height="20.0" width="150.0" x="745.0" y="440.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_117">
           <dc:Bounds height="15.0" width="29.0" x="805.0" y="442.0"/>
@@ -835,7 +840,7 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
           <dc:Bounds height="15.0" width="32.0" x="804.0" y="52.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Participant_84" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_3" isHorizontal="true" participantBandKind="bottom_non_initiating">
+      <bpmndi:BPMNShape id="BPMNShape_Participant_84" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_3" isHorizontal="true" isMessageVisible="true" participantBandKind="bottom_non_initiating">
         <dc:Bounds height="20.0" width="150.0" x="745.0" y="180.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_119">
           <dc:Bounds height="15.0" width="29.0" x="805.0" y="182.0"/>
@@ -847,7 +852,7 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
           <dc:Bounds height="15.0" width="29.0" x="1175.0" y="52.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Participant_86" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_4" isHorizontal="true" participantBandKind="bottom_non_initiating">
+      <bpmndi:BPMNShape id="BPMNShape_Participant_86" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_4" isHorizontal="true" isMessageVisible="true" participantBandKind="bottom_non_initiating">
         <dc:Bounds height="20.0" width="150.0" x="1115.0" y="180.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_121">
           <dc:Bounds height="15.0" width="32.0" x="1174.0" y="182.0"/>
@@ -859,7 +864,7 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
           <dc:Bounds height="15.0" width="29.0" x="1175.0" y="312.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Participant_88" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_5" isHorizontal="true" participantBandKind="bottom_non_initiating">
+      <bpmndi:BPMNShape id="BPMNShape_Participant_88" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_5" isHorizontal="true" isMessageVisible="true" participantBandKind="bottom_non_initiating">
         <dc:Bounds height="20.0" width="150.0" x="1115.0" y="440.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_123">
           <dc:Bounds height="15.0" width="32.0" x="1174.0" y="442.0"/>
@@ -869,6 +874,84 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
         <dc:Bounds height="150.0" width="100.0" x="210.0" y="490.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_124">
           <dc:Bounds height="144.0" width="88.0" x="216.0" y="490.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_89" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_1" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="20.0" width="150.0" x="175.0" y="100.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_125">
+          <dc:Bounds height="15.0" width="32.0" x="234.0" y="102.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_90" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_1" isHorizontal="true" isMessageVisible="true" participantBandKind="bottom_non_initiating">
+        <dc:Bounds height="20.0" width="150.0" x="175.0" y="230.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_126">
+          <dc:Bounds height="15.0" width="29.0" x="235.0" y="232.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_91" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_1" isHorizontal="true" isMessageVisible="true" participantBandKind="top_non_initiating">
+        <dc:Bounds height="20.0" width="150.0" x="465.0" y="100.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_127">
+          <dc:Bounds height="15.0" width="29.0" x="525.0" y="102.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_92" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_1" isHorizontal="true" isMessageVisible="true" participantBandKind="bottom_initiating">
+        <dc:Bounds height="20.0" width="150.0" x="465.0" y="230.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_128">
+          <dc:Bounds height="15.0" width="32.0" x="524.0" y="232.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_93" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_2" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="20.0" width="150.0" x="745.0" y="310.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_129">
+          <dc:Bounds height="15.0" width="32.0" x="804.0" y="312.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_94" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_2" isHorizontal="true" participantBandKind="bottom_non_initiating">
+        <dc:Bounds height="20.0" width="150.0" x="745.0" y="440.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_130">
+          <dc:Bounds height="15.0" width="29.0" x="805.0" y="442.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_95" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_3" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="20.0" width="150.0" x="745.0" y="50.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_131">
+          <dc:Bounds height="15.0" width="32.0" x="804.0" y="52.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_96" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_3" isHorizontal="true" participantBandKind="bottom_non_initiating">
+        <dc:Bounds height="20.0" width="150.0" x="745.0" y="180.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_132">
+          <dc:Bounds height="15.0" width="29.0" x="805.0" y="182.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_97" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_4" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="20.0" width="150.0" x="1115.0" y="50.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_133">
+          <dc:Bounds height="15.0" width="29.0" x="1175.0" y="52.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_98" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_4" isHorizontal="true" participantBandKind="bottom_non_initiating">
+        <dc:Bounds height="20.0" width="150.0" x="1115.0" y="180.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_134">
+          <dc:Bounds height="15.0" width="32.0" x="1174.0" y="182.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_99" bpmnElement="Participant_2" choreographyActivityShape="BPMNShape_ChoreographyTask_5" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="20.0" width="150.0" x="1115.0" y="310.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_135">
+          <dc:Bounds height="15.0" width="29.0" x="1175.0" y="312.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Participant_100" bpmnElement="Participant_1" choreographyActivityShape="BPMNShape_ChoreographyTask_5" isHorizontal="true" participantBandKind="bottom_non_initiating">
+        <dc:Bounds height="20.0" width="150.0" x="1115.0" y="440.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_136">
+          <dc:Bounds height="15.0" width="32.0" x="1174.0" y="442.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_TextAnnotation_4" bpmnElement="TextAnnotation_4">
+        <dc:Bounds height="71.0" width="100.0" x="546.0" y="393.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_137">
+          <dc:Bounds height="65.0" width="88.0" x="552.0" y="393.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_ExclusiveGateway_1">
@@ -914,8 +997,9 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
         <bpmndi:BPMNLabel id="BPMNLabel_25"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_ChoreographyTask_3" targetElement="BPMNShape_ParallelGateway_1">
-        <di:waypoint xsi:type="dc:Point" x="895.0" y="125.0"/>
-        <di:waypoint xsi:type="dc:Point" x="918.0" y="125.0"/>
+        <di:waypoint xsi:type="dc:Point" x="895.0" y="100.0"/>
+        <di:waypoint xsi:type="dc:Point" x="952.0" y="100.0"/>
+        <di:waypoint xsi:type="dc:Point" x="952.0" y="125.0"/>
         <di:waypoint xsi:type="dc:Point" x="1010.0" y="125.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_26"/>
       </bpmndi:BPMNEdge>
@@ -964,21 +1048,21 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
         <bpmndi:BPMNLabel id="BPMNLabel_82"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_Association_1" bpmnElement="Association_1" sourceElement="BPMNShape_ChoreographyTask_3" targetElement="BPMNShape_TextAnnotation_2">
-        <di:waypoint xsi:type="dc:Point" x="895.0" y="100.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1003.0" y="100.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1003.0" y="81.0"/>
+        <di:waypoint xsi:type="dc:Point" x="857.0" y="50.0"/>
+        <di:waypoint xsi:type="dc:Point" x="857.0" y="36.0"/>
+        <di:waypoint xsi:type="dc:Point" x="924.0" y="36.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_85"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_Association_2" bpmnElement="Association_2" sourceElement="BPMNShape_TextAnnotation_2" targetElement="BPMNShape_ChoreographyTask_4">
-        <di:waypoint xsi:type="dc:Point" x="1036.0" y="81.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1036.0" y="100.0"/>
+        <di:waypoint xsi:type="dc:Point" x="997.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="997.0" y="100.0"/>
         <di:waypoint xsi:type="dc:Point" x="1115.0" y="100.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_86"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_Association_3" bpmnElement="Association_3" sourceElement="BPMNShape_TextAnnotation_1" targetElement="BPMNShape_ChoreographyTask_3">
         <di:waypoint xsi:type="dc:Point" x="1013.0" y="480.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1013.0" y="162.0"/>
-        <di:waypoint xsi:type="dc:Point" x="895.0" y="162.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1013.0" y="150.0"/>
+        <di:waypoint xsi:type="dc:Point" x="895.0" y="150.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_110"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_Association_4" bpmnElement="Association_4" sourceElement="BPMNShape_TextAnnotation_1" targetElement="BPMNShape_ChoreographyTask_5">
@@ -986,6 +1070,23 @@ Choreography-Based Systems Using Blockchain</bpmn2:text>
         <di:waypoint xsi:type="dc:Point" x="1046.0" y="410.0"/>
         <di:waypoint xsi:type="dc:Point" x="1115.0" y="410.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_111"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Association_5" bpmnElement="Association_5" sourceElement="BPMNShape_ChoreographyTask_1" targetElement="BPMNShape_TextAnnotation_4">
+        <di:waypoint xsi:type="dc:Point" x="565.0" y="250.0"/>
+        <di:waypoint xsi:type="dc:Point" x="565.0" y="345.0"/>
+        <di:waypoint xsi:type="dc:Point" x="596.0" y="345.0"/>
+        <di:waypoint xsi:type="dc:Point" x="596.0" y="393.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_138"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Association_6" bpmnElement="Association_6" sourceElement="BPMNShape_TextAnnotation_4" targetElement="BPMNShape_ChoreographyTask_3">
+        <di:waypoint xsi:type="dc:Point" x="546.0" y="428.0"/>
+        <di:waypoint xsi:type="dc:Point" x="470.0" y="428.0"/>
+        <di:waypoint xsi:type="dc:Point" x="470.0" y="260.0"/>
+        <di:waypoint xsi:type="dc:Point" x="455.0" y="260.0"/>
+        <di:waypoint xsi:type="dc:Point" x="455.0" y="40.0"/>
+        <di:waypoint xsi:type="dc:Point" x="782.0" y="40.0"/>
+        <di:waypoint xsi:type="dc:Point" x="782.0" y="50.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_139"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">

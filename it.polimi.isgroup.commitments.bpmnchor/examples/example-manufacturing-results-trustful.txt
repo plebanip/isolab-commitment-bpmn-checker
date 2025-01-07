@@ -1,0 +1,22 @@
+[INFORMATION] Inferring trustful monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message PartRequestToSupplier is received until message PartResponseFromSupplier is received
+  [INFORMATION] Scenario 1: participant Supplier evaluates antecedent expression
+ [INFORMATION] checking consequent expression (part arrives within 3 days)
+  [INFORMATION] Consequent expression is evaluated when message PartResponseFromSupplier is received
+  [INFORMATION] Scenario 1: participant Manufacturer evaluates consequent expression
+[INFORMATION] checking commitment C2
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message PartRequestToBidder is received until message PartResponseFromBidder is received
+  [INFORMATION] Scenario 1: participant Bidder evaluates antecedent expression
+ [INFORMATION] checking consequent expression (part response arrives within 24 hours)
+  [INFORMATION] Consequent expression is evaluated when message PartResponseFromBidder is received
+  [INFORMATION] Scenario 1: participant Manufacturer evaluates consequent expression
+[INFORMATION] checking commitment C3
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message Confirmation is sent until message Shipment is received
+  [INFORMATION] Scenario 1: participant Manufacturer evaluates antecedent expression
+ [INFORMATION] checking consequent expression (order arrives within 7 days)
+  [INFORMATION] Consequent expression is evaluated when message Shipment is received
+  [INFORMATION] Scenario 1: participant Customer evaluates consequent expression

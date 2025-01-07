@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmnchor:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" xmlns:bpmnchor="http://www.example.org/bpmnchor" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.2.3.CR2-v20160209-2002" targetNamespace="http://org.eclipse.bpmn2/default/choreography">
-  <rootElements xsi:type="bpmn2:Message" id="Message_2" name="Order"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_4" name="Confirmation"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_3" name="Shipment"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_5" name="Rejection"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_6" name="Part request (to supplier)"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_8" name="Part response (from supplier)"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_7" name="Part request (to bidder)"/>
-  <rootElements xsi:type="bpmn2:Message" id="Message_10" name="Part response (from bidder)"/>
+  <rootElements xsi:type="bpmn2:Message" id="Order" name="Order"/>
+  <rootElements xsi:type="bpmn2:Message" id="Confirmation" name="Confirmation"/>
+  <rootElements xsi:type="bpmn2:Message" id="Shipment" name="Shipment"/>
+  <rootElements xsi:type="bpmn2:Message" id="Rejection" name="Rejection"/>
+  <rootElements xsi:type="bpmn2:Message" id="PartRequestToSupplier" name="Part request (to supplier)"/>
+  <rootElements xsi:type="bpmn2:Message" id="PartResponseFromSupplier" name="Part response (from supplier)"/>
+  <rootElements xsi:type="bpmn2:Message" id="PartRequestToBidder" name="Part request (to bidder)"/>
+  <rootElements xsi:type="bpmn2:Message" id="PartResponseFromBidder" name="Part response (from bidder)"/>
   <rootElements xsi:type="bpmn2:Choreography" id="Choreography_1" name="Default Choreography">
-    <participants id="Participant_1" name="Customer"/>
+    <participants id="Customer" name="Customer"/>
     <participants id="Participant_3" name="Process 1 Pool"/>
-    <participants id="Participant_4" name="Manufacturer"/>
-    <participants id="Participant_5" name="Supplier"/>
-    <participants id="Participant_6" name="Bidder">
+    <participants id="Manufacturer" name="Manufacturer"/>
+    <participants id="Supplier" name="Supplier"/>
+    <participants id="Bidder" name="Bidder">
       <participantMultiplicity maximum="10"/>
     </participants>
     <participants id="Participant_7" name="New Participant"/>
@@ -27,14 +27,14 @@
     <participants id="Participant_16" name="New Participant"/>
     <participants id="Participant_17" name="New Participant"/>
     <participants id="Participant_18" name="New Participant"/>
-    <messageFlows id="MessageFlow_1" messageRef="Message_2" name="Message Flow 1" sourceRef="Participant_1" targetRef="Participant_4"/>
-    <messageFlows id="MessageFlow_2" messageRef="Message_4" name="Message Flow 2" sourceRef="Participant_4" targetRef="Participant_1"/>
-    <messageFlows id="MessageFlow_3" messageRef="Message_3" name="Message Flow 3" sourceRef="Participant_4" targetRef="Participant_1"/>
-    <messageFlows id="MessageFlow_4" messageRef="Message_5" name="Message Flow 4" sourceRef="Participant_4" targetRef="Participant_1"/>
-    <messageFlows id="MessageFlow_5" messageRef="Message_6" name="Message Flow 5" sourceRef="Participant_4" targetRef="Participant_5"/>
-    <messageFlows id="MessageFlow_6" messageRef="Message_8" name="Message Flow 6" sourceRef="Participant_5" targetRef="Participant_4"/>
-    <messageFlows id="MessageFlow_7" messageRef="Message_7" name="Message Flow 7" sourceRef="Participant_4" targetRef="Participant_6"/>
-    <messageFlows id="MessageFlow_8" messageRef="Message_10" name="Message Flow 8" sourceRef="Participant_6" targetRef="Participant_4"/>
+    <messageFlows id="MessageFlow_1" messageRef="Order" name="Message Flow Order" sourceRef="Customer" targetRef="Manufacturer"/>
+    <messageFlows id="MessageFlow_2" messageRef="Confirmation" name="Message Flow Confirmation" sourceRef="Manufacturer" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_3" messageRef="Shipment" name="Message Flow Shipment" sourceRef="Manufacturer" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_4" messageRef="Rejection" name="Message Flow Rejection" sourceRef="Manufacturer" targetRef="Customer"/>
+    <messageFlows id="MessageFlow_5" messageRef="PartRequestToSupplier" name="Message Flow Part request (to supplier)" sourceRef="Manufacturer" targetRef="Supplier"/>
+    <messageFlows id="MessageFlow_6" messageRef="PartResponseFromSupplier" name="Message Flow Part response (from supplier)" sourceRef="Supplier" targetRef="Manufacturer"/>
+    <messageFlows id="MessageFlow_7" messageRef="PartRequestToBidder" name="Message Flow Part request (to bidder)" sourceRef="Manufacturer" targetRef="Bidder"/>
+    <messageFlows id="MessageFlow_8" messageRef="PartResponseFromBidder" name="Message Flow Part response (from bidder)" sourceRef="Bidder" targetRef="Manufacturer"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_1" sourceRef="TextAnnotation_1" targetRef="ChoreographyTask_2"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_2" sourceRef="TextAnnotation_1" targetRef="ChoreographyTask_3"/>
     <artifacts xsi:type="bpmn2:Association" id="Association_3" sourceRef="TextAnnotation_2" targetRef="ChoreographyTask_6"/>
@@ -42,12 +42,12 @@
     <artifacts xsi:type="bpmn2:TextAnnotation" id="TextAnnotation_1" text="Order delivered 7 days after confirmation"/>
     <artifacts xsi:type="bpmn2:TextAnnotation" id="TextAnnotation_2" text="Auction must close after 24 hours"/>
     <artifacts xsi:type="bpmn2:TextAnnotation" id="TextAnnotation_4" text="Parts delivered in 3 days."/>
-    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_1" name="Order Request" incoming="SequenceFlow_1" outgoing="SequenceFlow_17" participantRefs="Participant_1 Participant_4" initiatingParticipantRef="Participant_1" messageFlowRef="MessageFlow_1"/>
-    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_2" name="Order Confirmation" incoming="SequenceFlow_6" outgoing="SequenceFlow_7" participantRefs="Participant_4 Participant_1" initiatingParticipantRef="Participant_4" messageFlowRef="MessageFlow_2"/>
-    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_3" name="Order Delivery" incoming="SequenceFlow_7" outgoing="SequenceFlow_15" participantRefs="Participant_4 Participant_1" initiatingParticipantRef="Participant_4" messageFlowRef="MessageFlow_3"/>
-    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_4" name="Order Rejection" incoming="SequenceFlow_4" outgoing="SequenceFlow_16" participantRefs="Participant_4 Participant_1" initiatingParticipantRef="Participant_4" messageFlowRef="MessageFlow_4"/>
-    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_5" name="Part Procurement" incoming="SequenceFlow_18" outgoing="SequenceFlow_9" participantRefs="Participant_4 Participant_5" initiatingParticipantRef="Participant_4" loopType="MultiInstanceParallel" messageFlowRef="MessageFlow_5 MessageFlow_6"/>
-    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_6" name="Part Auction" incoming="SequenceFlow_11" outgoing="SequenceFlow_12" participantRefs="Participant_4 Participant_6" initiatingParticipantRef="Participant_4" messageFlowRef="MessageFlow_7 MessageFlow_8"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_1" name="Order Request" incoming="SequenceFlow_1" outgoing="SequenceFlow_17" participantRefs="Customer Manufacturer" initiatingParticipantRef="Customer" messageFlowRef="MessageFlow_1"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_2" name="Order Confirmation" incoming="SequenceFlow_6" outgoing="SequenceFlow_7" participantRefs="Manufacturer Customer" initiatingParticipantRef="Manufacturer" messageFlowRef="MessageFlow_2"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_3" name="Order Delivery" incoming="SequenceFlow_7" outgoing="SequenceFlow_15" participantRefs="Manufacturer Customer" initiatingParticipantRef="Manufacturer" messageFlowRef="MessageFlow_3"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_4" name="Order Rejection" incoming="SequenceFlow_4" outgoing="SequenceFlow_16" participantRefs="Manufacturer Customer" initiatingParticipantRef="Manufacturer" messageFlowRef="MessageFlow_4"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_5" name="Part Procurement" incoming="SequenceFlow_18" outgoing="SequenceFlow_9" participantRefs="Manufacturer Supplier" initiatingParticipantRef="Manufacturer" loopType="MultiInstanceParallel" messageFlowRef="MessageFlow_5 MessageFlow_6"/>
+    <flowElements xsi:type="bpmn2:ChoreographyTask" id="ChoreographyTask_6" name="Part Auction" incoming="SequenceFlow_11" outgoing="SequenceFlow_12" participantRefs="Manufacturer Bidder" initiatingParticipantRef="Manufacturer" messageFlowRef="MessageFlow_7 MessageFlow_8"/>
     <flowElements xsi:type="bpmn2:EndEvent" id="EndEvent_1" name="End Event 1" incoming="SequenceFlow_15"/>
     <flowElements xsi:type="bpmn2:EndEvent" id="EndEvent_2" name="End Event 2" incoming="SequenceFlow_16"/>
     <flowElements xsi:type="bpmn2:EventBasedGateway" id="EventBasedGateway_1" name="Can fulfill order?" incoming="SequenceFlow_17" outgoing="SequenceFlow_18 SequenceFlow_19 SequenceFlow_20" gatewayDirection="Diverging"/>

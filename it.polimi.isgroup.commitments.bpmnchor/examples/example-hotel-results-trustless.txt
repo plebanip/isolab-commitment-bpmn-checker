@@ -1,0 +1,41 @@
+[INFORMATION] Inferring trustless monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participant PaymentGateway must grant access to Hotel and Client on PaymentGWRes
+  [INFORMATION] Scenario 2: Participants Hotel and Client must put in place mechanisms to determine when Payment is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participant Hotel must grant access to Client on BookingRes
+  [INFORMATION] Scenario 2: Participants Hotel and Client must put in place mechanisms to determine when Booking is received
+ [INFORMATION] checking antecedent expression (payment > 500 Eur)
+  [INFORMATION] Antecedent expression is evaluated from when message Payment is received until message Booking is received
+  [INFORMATION] Scenario 1: participants Hotel and Client evaluate antecedent expression
+   [WARNING] Participant PaymentGateway must grant access to Hotel on PaymentGWRes
+   [WARNING] Participant PaymentGateway must grant access to Client on PaymentGWRes
+ [INFORMATION] checking consequent expression (confirmation arrives within 1 hour)
+  [INFORMATION] Consequent expression is evaluated when message Booking is received
+  [INFORMATION] Scenario 1: participants Hotel and Client evaluate consequent expression
+[INFORMATION] checking commitment C2
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participant PaymentGateway must grant access to Hotel and Client on PaymentGWRes
+  [INFORMATION] Scenario 2: Participants Hotel and Client must put in place mechanisms to determine when Payment is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participant Hotel must grant access to Client on ReceiptRes
+  [INFORMATION] Scenario 2: Participants Hotel and Client must put in place mechanisms to determine when Receipt is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message Payment is received until message Receipt is received
+  [INFORMATION] Scenario 1: participants Hotel and Client evaluate antecedent expression
+ [INFORMATION] checking consequent expression (receipt arrives within 48 hours)
+  [INFORMATION] Consequent expression is evaluated when message Receipt is received
+  [INFORMATION] Scenario 1: participants Hotel and Client evaluate consequent expression
+[INFORMATION] checking commitment C3
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participants Client and Hotel must put in place mechanisms to determine when BookRoom is sent
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participant PaymentGateway must grant access to Client and Hotel on PaymentGWRes
+  [INFORMATION] Scenario 2: Participants Client and Hotel must put in place mechanisms to determine when Payment is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message BookRoom is sent until message Payment is received
+  [INFORMATION] Scenario 1: participants Client and Hotel evaluate antecedent expression
+ [INFORMATION] checking consequent expression (payment arrives within 24 hours)
+  [INFORMATION] Consequent expression is evaluated when message Payment is received
+  [INFORMATION] Scenario 1: participants Client and Hotel evaluate consequent expression

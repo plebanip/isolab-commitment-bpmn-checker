@@ -60,7 +60,7 @@ public class InferDeploymentRequirements {
 
 					/* check antecedent */
 					try {
-						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking antecedent expression", 1));
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking antecedent expression " + ((Commitment) r).getAntecedentExpr().getBody(), 1));
 
 						List<MonitoringResource> smartDevices = ModelNavigator.getSmartDevices(((Commitment) r).getAntecedentExpr(),
 								def, null);
@@ -97,7 +97,7 @@ public class InferDeploymentRequirements {
 					/* check active */
 					if (((Commitment) r).getActiveExpr() != null) {
 						try {
-							messages.add(new ConsoleMessage(Severity.INFORMATION, "checking active expression", 1));
+							messages.add(new ConsoleMessage(Severity.INFORMATION, "checking active expression "  + ((Commitment) r).getActiveExpr().getBody(), 1));
 
 							List<MonitoringResource> smartDevices = ModelNavigator.getSmartDevices(((Commitment) r).getActiveExpr(),
 									def, null);
@@ -135,7 +135,7 @@ public class InferDeploymentRequirements {
 					/* check consequent */
 					Participant creditor = ModelNavigator.getParticipant(end);
 					try {
-						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking consequent expression", 1));
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking consequent expression "  + ((Commitment) r).getConsequentExpr().getBody(), 1));
 
 						List<MonitoringResource> smartDevices = ModelNavigator.getSmartDevices(((Commitment) r).getConsequentExpr(),
 								def, null);
@@ -220,7 +220,7 @@ public class InferDeploymentRequirements {
 
 					/* check antecedent */
 					try {
-						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking antecedent expression", 1));
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking antecedent expression "  + ((Commitment) r).getAntecedentExpr().getBody(), 1));
 
 						List<MonitoringResource> debtorSmartDevices = ModelNavigator.getSmartDevices(
 								((Commitment) r).getAntecedentExpr(), def, debtor);
@@ -270,7 +270,7 @@ public class InferDeploymentRequirements {
 					/* check active */
 					if (((Commitment) r).getActiveExpr() != null) {
 						try {
-							messages.add(new ConsoleMessage(Severity.INFORMATION, "checking active expression", 1));
+							messages.add(new ConsoleMessage(Severity.INFORMATION, "checking active expression "  + ((Commitment) r).getActiveExpr().getBody(), 1));
 
 							List<MonitoringResource> debtorSmartDevices = ModelNavigator.getSmartDevices(
 									((Commitment) r).getActiveExpr(), def, debtor);
@@ -322,7 +322,7 @@ public class InferDeploymentRequirements {
 
 					/* check consequent */
 					try {
-						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking consequent expression", 1));
+						messages.add(new ConsoleMessage(Severity.INFORMATION, "checking consequent expression " + ((Commitment) r).getConsequentExpr().getBody(), 1));
 
 						List<MonitoringResource> debtorSmartDevices = ModelNavigator.getSmartDevices(
 								((Commitment) r).getConsequentExpr(), def, debtor);

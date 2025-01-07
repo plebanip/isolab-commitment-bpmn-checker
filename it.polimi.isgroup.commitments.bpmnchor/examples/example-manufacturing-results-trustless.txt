@@ -1,0 +1,34 @@
+[INFORMATION] Inferring trustless monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participants Supplier and Manufacturer must put in place mechanisms to determine when PartRequestToSupplier is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participants Supplier and Manufacturer must put in place mechanisms to determine when PartResponseFromSupplier is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message PartRequestToSupplier is received until message PartResponseFromSupplier is received
+  [INFORMATION] Scenario 1: participants Supplier and Manufacturer evaluate antecedent expression
+ [INFORMATION] checking consequent expression (part arrives within 3 days)
+  [INFORMATION] Consequent expression is evaluated when message PartResponseFromSupplier is received
+  [INFORMATION] Scenario 1: participants Supplier and Manufacturer evaluate consequent expression
+[INFORMATION] checking commitment C2
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participants Bidder and Manufacturer must put in place mechanisms to determine when PartRequestToBidder is received
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participants Bidder and Manufacturer must put in place mechanisms to determine when PartResponseFromBidder is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message PartRequestToBidder is received until message PartResponseFromBidder is received
+  [INFORMATION] Scenario 1: participants Bidder and Manufacturer evaluate antecedent expression
+ [INFORMATION] checking consequent expression (part response arrives within 24 hours)
+  [INFORMATION] Consequent expression is evaluated when message PartResponseFromBidder is received
+  [INFORMATION] Scenario 1: participants Bidder and Manufacturer evaluate consequent expression
+[INFORMATION] checking commitment C3
+ [WARNING] A mechanism to make the participant aware of when the scope starts is required
+  [INFORMATION] Scenario 1: Participants Manufacturer and Customer must put in place mechanisms to determine when Confirmation is sent
+ [WARNING] A mechanism to make the participant aware of when the scope ends is required
+  [INFORMATION] Scenario 1: Participants Manufacturer and Customer must put in place mechanisms to determine when Shipment is received
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message Confirmation is sent until message Shipment is received
+  [INFORMATION] Scenario 1: participants Manufacturer and Customer evaluate antecedent expression
+ [INFORMATION] checking consequent expression (order arrives within 7 days)
+  [INFORMATION] Consequent expression is evaluated when message Shipment is received
+  [INFORMATION] Scenario 1: participants Manufacturer and Customer evaluate consequent expression

@@ -1,0 +1,24 @@
+[INFORMATION] Inferring trustful monitoring deployment requirements
+[INFORMATION] checking commitment C1
+ [INFORMATION] checking antecedent expression (1st level support)
+  [INFORMATION] Antecedent expression is evaluated from when message Incident is received until message IncidentClosedNotification is received
+  [INFORMATION] Scenario 1: participant ServiceDesk evaluates antecedent expression
+   [INFORMATION] Participant ServiceDesk can access IncidentRes
+ [INFORMATION] checking consequent expression (incident closed in 48 hours)
+  [INFORMATION] Consequent expression is evaluated when message IncidentClosedNotification is received
+  [INFORMATION] Scenario 1: participant Customer evaluates consequent expression
+[INFORMATION] checking commitment C2
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message 2ndLevelSupportEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participant 2ndLevelSupport evaluates antecedent expression
+ [INFORMATION] checking consequent expression (incident resolved in 7 days)
+  [INFORMATION] Antecedent expression is evaluated from when message 2ndLevelSupportEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participant ServiceDesk evaluates consequent expression
+[INFORMATION] checking commitment C3
+ [INFORMATION] checking antecedent expression true
+  [INFORMATION] Antecedent expression is evaluated from when message ITManagerEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participant ITManager evaluates antecedent expression
+ [INFORMATION] checking consequent expression (IT manager)
+  [INFORMATION] Antecedent expression is evaluated from when message ITManagerEscalation is received until message IncidentResolved2ndLevelSupport is received
+  [INFORMATION] Scenario 1: participant ServiceDesk evaluates consequent expression
+   [INFORMATION] Participant ServiceDesk can access IncidentRes
