@@ -98,17 +98,17 @@
     <flowElements xsi:type="bpmn2:SequenceFlow" id="SequenceFlow_21" sourceRef="ChoreographyTask_10" targetRef="EndEvent_1"/>
     <flowElements xsi:type="bpmn2:StartEvent" id="StartEvent_1" name="Start Event 1" outgoing="SequenceFlow_1"/>
   </rootElements>
-  <rootElements xsi:type="bpmnchor:Commitment" id="C1" antecedentExpr="C1_AntecedentExpr" consequentExpr="C1_ConsequentExpr">
+  <rootElements xsi:type="bpmnchor:Commitment" id="C1" type="Persistent" antecedentExpr="C1_AntecedentExpr" consequentExpr="C1_ConsequentExpr">
     <scopeBegin id="C1_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_1"/>
     <scopeEnd id="C1_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_11"/>
   </rootElements>
   <rootElements xsi:type="bpmnchor:Commitment" id="C2" type="Persistent" antecedentExpr="C2_AntecedentExpr" consequentExpr="C2_ConsequentExpr">
-    <scopeBegin id="C2_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_5"/>
-    <scopeEnd id="C2_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_9"/>
+    <scopeBegin id="C2_ScopeBegin" side="Receive" messageFlowRef="MessageFlow_1"/>
+    <scopeEnd id="C2_ScopeEnd" side="Receive" messageFlowRef="MessageFlow_11"/>
   </rootElements>
   <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1_AntecedentExpr" body="(1st level support)" itemRefs="IncidentDef"/>
   <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C1_ConsequentExpr" body="(incident closed in 48 hours)"/>
-  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_AntecedentExpr" body="true"/>
+  <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_AntecedentExpr" body="(2nd level support)"/>
   <rootElements xsi:type="bpmnchor:CommitmentExpression" id="C2_ConsequentExpr" body="(incident resolved in 7 days)"/>
   <rootElements xsi:type="bpmn2:ItemDefinition" id="IncidentDef"/>
   <rootElements xsi:type="bpmnchor:MonitoringResource" id="IncidentRes" type="API" ownerRef="ServiceDesk" itemRef="IncidentDef"/>
